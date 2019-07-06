@@ -13,31 +13,31 @@
   </div>
   <div class="vx-row">
     <div class="vx-col w-full mb-base">
-  			<vx-card title="Revenue Last Month">
-  					<div slot="no-body" class="p-6 pb-0">
-  							<div class="flex">
-  									<div>
-  											<p class="mb-1 font-semibold">Total</p>
-  											<p class="text-3xl"><sup class="text-base mr-1">$</sup>{{ lastMonthamountRevenue }}</p>
-  									</div>
-  							</div>
-  							<vue-apex-charts type=line height=266 :options="revenueLastMonth.chartOptions" :series="revenueLastMonth.series" />
-  					</div>
-  			</vx-card>
-  	</div>
+      <vx-card title="Revenue Last Month">
+        <div slot="no-body" class="p-6 pb-0">
+          <div class="flex">
+            <div>
+              <p class="mb-1 font-semibold">Total</p>
+              <p class="text-3xl"><sup class="text-base mr-1">$</sup>{{ lastMonthamountRevenue }}</p>
+            </div>
+          </div>
+          <vue-apex-charts type=line height=266 :options="revenueLastMonth.chartOptions" :series="revenueLastMonth.series" />
+        </div>
+      </vx-card>
+    </div>
     <div class="vx-col w-full mb-base">
-  			<vx-card title="Revenue This Month">
-  					<div slot="no-body" class="p-6 pb-0">
-  							<div class="flex">
-  									<div>
-  											<p class="mb-1 font-semibold">Total</p>
-  											<p class="text-3xl"><sup class="text-base mr-1">$</sup>{{ thisMonthamountRevenue }}</p>
-  									</div>
-  							</div>
-  							<vue-apex-charts type=line height=266 :options="revenueThisMonth.chartOptions" :series="revenueThisMonth.series" />
-  					</div>
-  			</vx-card>
-  	</div>
+      <vx-card title="Revenue This Month">
+        <div slot="no-body" class="p-6 pb-0">
+          <div class="flex">
+            <div>
+              <p class="mb-1 font-semibold">Total</p>
+              <p class="text-3xl"><sup class="text-base mr-1">$</sup>{{ thisMonthamountRevenue }}</p>
+            </div>
+          </div>
+          <vue-apex-charts type=line height=266 :options="revenueThisMonth.chartOptions" :series="revenueThisMonth.series" />
+        </div>
+      </vx-card>
+    </div>
   </div>
 </div>
 </template>
