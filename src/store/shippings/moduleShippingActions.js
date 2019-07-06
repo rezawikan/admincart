@@ -23,7 +23,7 @@ export default {
     },
     createShippingCourier({ dispatch }, payload) {
       return axios.post(`${process.env.API_URL}shipping-courier`, payload)
-      .then((response) => {
+      .then(() => {
         dispatch('getShippingCourier')
       }, (error) => {
           return error.response

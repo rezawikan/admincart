@@ -4,8 +4,7 @@
 
 <script>
 import vSelect from 'vue-select'
-import _ from 'lodash'
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   props: {
     options: {

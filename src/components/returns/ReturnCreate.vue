@@ -15,25 +15,19 @@
           <div class="vx-row mb-6">
             <div class="vx-col w-full">
               <h4 class="mb-6">Select Products to Return</h4>
-              <table class="w-full">
+              <table class="w-full" v-if="order.products">
                 <tr>
                   <th>Product Name</th>
                   <th>Current</th>
                   <th>Returned</th>
                 </tr>
-                <tr :key="product.id" v-for="(product, index) in order.products" v-if="order.products">
+                <tr :key="product.id" v-for="(product, index) in order.products">
                   <td>{{ product.name }}</td>
                   <td>
                     <vs-input-number min="0" :max="product.quantity" v-model="products[index].quantity" icon-inc="expand_less" icon-dec="expand_more"/>
                   </td>
                   <td>
                     {{ product.quantity - products[index].quantity}}
-                  </td>
-                </tr>
-                <tr v-else>
-                    <td>Empty</td>
-                    <td>Empty</td>
-                    <td>Empty</td>
                   </td>
                 </tr>
               </table>
@@ -48,9 +42,7 @@
 
 <script>
 import OrderIdDropdown from '@/components/form/OrderIdDropdown.vue'
-import { mapActions, mapMutations, mapGetters  } from 'vuex'
-import { isEmpty } from 'lodash'
-import { slugString } from '../../helpers/slug'
+import { mapActions } from 'vuex'
 export default {
   components: {
      OrderIdDropdown
@@ -116,7 +108,7 @@ export default {
         order_id: this.order.id,
         updated_products: this.products,
         return_values: this.return_values
-      }).then((response) => {
+      }).then(() => {
         this.$vs.loading.close('#button-save-return > .con-vs-loading')
         this.popupActivo = false
       })

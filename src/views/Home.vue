@@ -14,7 +14,7 @@
 
     <!-- CARD 3: ORDER RECIEVED -->
     <div class="vx-col w-full sm:w-1/3 md:w-1/3 lg:w-1/3 xl:w-1/3 mb-base">
-      <statistics-card-line icon="LoaderIcon" :statistic="amountProcessing" statisticTitle="Processing" :chartData="processing"color='danger' type='area'></statistics-card-line>
+      <statistics-card-line icon="LoaderIcon" :statistic="amountProcessing" statisticTitle="Processing" :chartData="processing" color='danger' type='area'></statistics-card-line>
     </div>
   </div>
 
@@ -52,12 +52,10 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { mapActions } from 'vuex'
 import VueApexCharts from 'vue-apexcharts'
 import analyticsData from './analyticsData.js'
 import StatisticsCardLine from '@/components/statistics-cards/StatisticsCardLine.vue'
-import ChangeTimeDurationDropdown from '@/components/ChangeTimeDurationDropdown.vue'
 export default {
   metaInfo: {
     title: 'Ummu Zayn',
@@ -69,7 +67,6 @@ export default {
   },
 	components: {
 		StatisticsCardLine,
-		ChangeTimeDurationDropdown,
 		VueApexCharts
 	},
 

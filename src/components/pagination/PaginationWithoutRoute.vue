@@ -60,15 +60,14 @@
 
 <script>
 import _ from 'lodash'
-import qs from 'qs'
 export default {
   props: {
     meta: {
-      type: Object/Array,
+      type: Object,
       required: true
     },
     queries: {
-      type: Object/Array
+      type: Object
     }
   },
 

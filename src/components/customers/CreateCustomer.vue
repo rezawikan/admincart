@@ -42,7 +42,6 @@
 <script>
 import { mapActions } from 'vuex'
 import { isEmpty } from 'lodash'
-import { slugString } from '../../helpers/slug'
 export default {
   data(){
     return {
@@ -70,7 +69,7 @@ export default {
         this.createUser({
               ...this.form
         }).then((response) => {
-            
+
             if (isEmpty(response.data.errors)) {
               this.popupActivo = false
 

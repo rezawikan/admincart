@@ -84,8 +84,6 @@ export default {
       formData.append('folder', this.folder)
     },
     removeEvent (file) {
-      console.log(file);
-      console.log('jalan');
       if (file.status != "success") {
           this.deleteImage({ folder: this.folder, file: file })
       }
