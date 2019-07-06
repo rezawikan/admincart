@@ -8,18 +8,21 @@
             </div>
           </div>
           <div class="vx-row mb-6">
-            <div class="vx-col w-full">
-              <vs-input class="w-full" type="number" label="Base Price" v-model="product.base_price" />
+            <div class="vx-col w-full" v-if="!custom">
+              <vs-input class="w-full" type="number" label="base price" v-model="product.base_price" name="base price" ref="base price" v-validate="'required|numeric'" data-vv-validate-on="blur"/>
+              <span class="text-danger text-sm" :show="errors.has('base price')">{{ errors.first('base price') }}</span>
             </div>
           </div>
-          <div class="vx-row mb-6">
+          <div class="vx-row mb-6" v-if="!custom">
             <div class="vx-col w-full">
-              <vs-input class="w-full" type="number" label="Price" v-model="product.price" />
+              <vs-input class="w-full" type="number" label="Price" v-model="product.price" name="price" ref="price" v-validate="'required|numeric'" data-vv-validate-on="blur"/>
+              <span class="text-danger text-sm" :show="errors.has('price')">{{ errors.first('price') }}</span>
             </div>
           </div>
-          <div class="vx-row mb-6">
+          <div class="vx-row mb-6" v-if="!custom">
             <div class="vx-col w-full">
-              <vs-input class="w-full" type="number" label="Weight" v-model="product.weight" />
+              <vs-input class="w-full" type="number" label="Weight" v-model="product.weight" name="weight" ref="weight" v-validate="'required|numeric'" data-vv-validate-on="blur" />
+              <span class="text-danger text-sm" :show="errors.has('weight')">{{ errors.first('weight') }}</span>
             </div>
           </div>
           <div class="vx-row mb-6">
@@ -29,7 +32,8 @@
           </div>
           <div class="vx-row mb-6">
             <div class="vx-col w-full">
-              <vs-textarea label="Summary" v-model="product.description" />
+              <vs-textarea label="Summary" v-model="product.description" name="description" ref="description" v-validate="'required|numeric'" data-vv-validate-on="blur" />
+              <span class="text-danger text-sm" :show="errors.has('description')">{{ errors.first('description') }}</span>
             </div>
           </div>
           <div class="vx-row mb-6">
@@ -52,26 +56,26 @@
                 </div>
                 <div class="vx-row" v-for="(variant, index) in variation.variations" :key="variant.id">
                   <div :class="custom ? 'sm:w-1/4' : 'sm:w-1/2'" class="vx-col w-full mb-2">
-                    <vs-input class="w-full" label-placeholder="Name"  v-model="variant.name" :name="'Variant ' + variant.type.name" :ref="'Variant ' + variant.type.name" v-validate="'required|max:6'" data-vv-validate-on="blur"/>
-                    <span class="text-danger text-sm" :show="errors.has('Variant ' + variant.type.name)">{{ errors.first('Variant ' + variant.type.name) }}</span>
+                    <vs-input class="w-full" label-placeholder="Name"  v-model="variant.name" :name="'variant ' + variant.type.name.toLowerCase().trim()" :ref="'variant ' + variant.type.name.toLowerCase().trim()" v-validate="'required|max:6'" data-vv-validate-on="blur"/>
+                    <span class="text-danger text-sm" :show="errors.has('variant ' + variant.type.name.toLowerCase().trim())">{{ errors.first('variant ' + variant.type.name.toLowerCase().trim()) }}</span>
                   </div>
-                  <div class="vx-col sm:w-1/6 w-full mb-2" v-if="custom">
-                    <vs-input class="w-full" label-placeholder="Base Price" v-model="variant.base_price" :name="'Base Price ' + variant.type.name" :ref="'Base Price ' + variant.type.name"  v-validate="'numeric'" data-vv-validate-on="blur" />
-                    <span class="text-danger text-sm" :show="errors.has('Base Price ' + variant.type.name)">{{ errors.first('Base Price ' + variant.type.name) }}</span>
+                  <div class="vx-col lg:w-1/4 md:w-1/4 sm:w-1/6 w-full mb-2" v-if="custom">
+                    <vs-input class="w-full" label-placeholder="base price" v-model="variant.base_price" :name="'base price ' + variant.type.name.toLowerCase().trim()" :ref="'base price ' + variant.type.name.toLowerCase().trim()"  v-validate="'required|numeric'" data-vv-validate-on="blur" />
+                    <span class="text-danger text-sm" :show="errors.has('base price ' + variant.type.name.toLowerCase().trim())">{{ errors.first('base price ' + variant.type.name.toLowerCase().trim()) }}</span>
                   </div>
-                  <div class="vx-col sm:w-1/6 w-full mb-2" v-if="custom">
-                    <vs-input class="w-full" label-placeholder="Price" v-model="variant.price" :name="'Price ' + variant.type.name" :ref="'Price ' + variant.type.name"  v-validate="'numeric'" data-vv-validate-on="blur" />
-                    <span class="text-danger text-sm" :show="errors.has('Price ' + variant.type.name)">{{ errors.first('Price ' + variant.type.name) }}</span>
+                  <div class="vx-col lg:w-1/4 md:w-1/4 sm:w-1/6 w-full mb-2" v-if="custom">
+                    <vs-input class="w-full" label-placeholder="price" v-model="variant.price" :name="'price ' + variant.type.name.toLowerCase().trim()" :ref="'price ' + variant.type.name.toLowerCase().trim()"  v-validate="'required|numeric'" data-vv-validate-on="blur" />
+                    <span class="text-danger text-sm" :show="errors.has('price ' + variant.type.name.toLowerCase().trim())">{{ errors.first('price ' + variant.type.name.toLowerCase().trim()) }}</span>
                   </div>
-                  <div class="vx-col sm:w-1/6 w-full mb-2" v-if="custom">
-                    <vs-input class="w-full" label-placeholder="Weight in gram" v-model="variant.weight" :name="'Weight ' + variant.type.name" :ref="'Weight ' + variant.type.name"  v-validate="'numeric'" data-vv-validate-on="blur"/>
-                    <span class="text-danger text-sm" :show="errors.has('Weight ' + variant.type.name)">{{ errors.first('Weight ' + variant.type.name) }}</span>
+                  <div class="vx-col lg:w-1/4 md:w-1/4 sm:w-1/6 w-full mb-2" v-if="custom">
+                    <vs-input class="w-full" label-placeholder="Weight in gram" v-model="variant.weight" :name="'weight ' + variant.type.name.toLowerCase().trim()" :ref="'weight ' + variant.type.name.toLowerCase().trim()"  v-validate="'required|numeric'" data-vv-validate-on="blur"/>
+                    <span class="text-danger text-sm" :show="errors.has('weight ' + variant.type.name.toLowerCase().trim())">{{ errors.first('weight ' + variant.type.name.toLowerCase().trim()) }}</span>
                   </div>
-                  <div :class="custom ? 'sm:w-1/6' : 'sm:w-1/3'" class="vx-col w-full mb-2">
-                    <vs-input class="w-full" label-placeholder="Stock" v-model="variant.stock_count" :name="'Stock ' + variant.type.name" :ref="'Stock ' + variant.type.name"  v-validate="'required|numeric'" data-vv-validate-on="blur"/>
-                    <span class="text-danger text-sm" :show="errors.has('Stock ' + variant.type.name)">{{ errors.first('Stock ' + variant.type.name) }}</span>
+                  <div :class="custom ? 'lg:w-1/4 md:w-1/3 sm:w-1/6' : 'lg:w-1/3 sm:w-1/3 md:w-1/3'" class="vx-col w-full mb-2">
+                    <vs-input class="w-full" label-placeholder="Stock" v-model="variant.stock_count" :name="'stock ' + variant.type.name.toLowerCase().trim()" :ref="'stock ' + variant.type.name.toLowerCase().trim()"  v-validate="'required|numeric'" data-vv-validate-on="blur"/>
+                    <span class="text-danger text-sm" :show="errors.has('stock ' + variant.type.name.toLowerCase().trim())">{{ errors.first('stock ' + variant.type.name.toLowerCase().trim()) }}</span>
                   </div>
-                  <div :class="custom ? 'sm:w-1/8' : 'sm:w-1/8'" class="vx-col mb-2">
+                  <div :class="custom ? 'sm:w-1/8' : 'sm:w-1/8 md:w-1/8'" class="vx-col mb-2">
                     <div class="remove">
                         <font-awesome-icon icon="trash" @click="removeItem(index,key)"></font-awesome-icon>
                     </div>
@@ -171,19 +175,25 @@ export default {
         scale: 0.45
       })
 
-      this.saveProduct({
-          name: this.product.name,
-          slug: this.product.slug,
-          stock: this.product.stock_count,
-          description: this.product.description,
-          weight: this.product.weight,
-          price: this.product.price,
-          base_price: this.product.base_price,
-          variations: this.variations,
-          delete: this.delete,
-          origin: this.$route.params.slug
-      }).then((response) => {
-          this.$router.replace({ name: 'products' })
+      this.$validator.validateAll().then(result => {
+        if(result) {
+          this.saveProduct({
+              name: this.product.name,
+              slug: this.product.slug,
+              stock: this.product.stock_count,
+              description: this.product.description,
+              weight: this.product.weight,
+              price: this.product.price,
+              base_price: this.product.base_price,
+              variations: this.variations,
+              delete: this.delete,
+              origin: this.$route.params.slug
+          }).then((response) => {
+              this.$router.replace({ name: 'products' })
+          })
+        } else {
+            this.$vs.loading.close('#button-save-product > .con-vs-loading')
+        }
       })
 
       this.$vs.loading.close('#button-save-product > .con-vs-loading')

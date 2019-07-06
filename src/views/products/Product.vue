@@ -25,7 +25,7 @@
           Product Name
         </vs-th>
         <vs-th>
-          Summary
+          Image
         </vs-th>
 
         <vs-th>
@@ -49,8 +49,12 @@
             {{data[indextr].name}}
           </vs-td>
 
-          <vs-td :data="data[indextr].slug">
-            {{data[indextr].description}}
+          <vs-td :data="data[indextr].id" v-if="data[indextr].images != 0">
+            <img :src="data[indextr].images[0].location | DO_SPACES" alt="">
+          </vs-td>
+
+          <vs-td :data="data[indextr].id" v-else>
+            <img :src="require('@/assets/images/logo/logo.png')" alt="">
           </vs-td>
 
           <vs-td :data="data[indextr].price">
@@ -67,7 +71,7 @@
           <vs-td :data="data[indextr].id">
             <router-link :to="{ name: 'product-edit', params: { slug:data[indextr].slug } }">Edit</router-link>
             <vs-divider/>
-            <router-link :to="{ name: 'product-edit', params: { slug:'asd' } }">Delete</router-link>
+            <!-- <router-link :to="{ name: 'product-edit', params: { slug:'asd' } }">Delete</router-link> -->
           </vs-td>
         </vs-tr>
       </template>
