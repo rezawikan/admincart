@@ -32,14 +32,14 @@ export default {
     filtered() {
       return this.options.map(filter => {
         let price = filter.price*this.weight
-        let data  = filter.courier+' - '+filter.type+' - '+filter.estimation+' - '+price.toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1\.")
+        let data  = filter.courier+' - '+filter.type+' - '+filter.estimation+' - '+price.toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1")
         return ({label: data, value: filter.id})
       })
     },
     selected() {
       return this.options.filter((x) => { return x.id == this.selectedID }).map(filter => {
         let price = filter.price*this.weight
-        let data  = filter.courier+' - '+filter.type+' - '+filter.estimation+' - '+price.toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1\.")
+        let data  = filter.courier+' - '+filter.type+' - '+filter.estimation+' - '+price.toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1")
         return ({label: data, value: filter.id})
       })
     }

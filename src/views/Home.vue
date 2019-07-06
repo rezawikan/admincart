@@ -1,23 +1,16 @@
 <template>
 <div id="dashboard-analytics">
   <div class="vx-row">
-
-		<!-- CARD 2: SUBSCRIBERS GAINED -->
     <div class="vx-col w-full sm:w-1/3 md:w-1/3 lg:w-1/3 xl:w-1/3 mb-base">
       <statistics-card-line icon="ShoppingBagIcon" :statistic="amountPending" statisticTitle="Pending" :chartData="pending" color='warning' type='area'></statistics-card-line>
     </div>
-
-    <!-- CARD 2: SUBSCRIBERS GAINED -->
     <div class="vx-col w-full sm:w-1/3 md:w-1/3 lg:w-1/3 xl:w-1/3 mb-base">
       <statistics-card-line icon="DropletIcon" :statistic="amountCompleted" statisticTitle="Completed" :chartData="completed" color='success' type='area'></statistics-card-line>
     </div>
-
-    <!-- CARD 3: ORDER RECIEVED -->
     <div class="vx-col w-full sm:w-1/3 md:w-1/3 lg:w-1/3 xl:w-1/3 mb-base">
       <statistics-card-line icon="LoaderIcon" :statistic="amountProcessing" statisticTitle="Processing" :chartData="processing" color='danger' type='area'></statistics-card-line>
     </div>
   </div>
-
   <div class="vx-row">
     <div class="vx-col w-full mb-base">
   			<vx-card title="Revenue Last Month">
@@ -32,7 +25,6 @@
   					</div>
   			</vx-card>
   	</div>
-
     <div class="vx-col w-full mb-base">
   			<vx-card title="Revenue This Month">
   					<div slot="no-body" class="p-6 pb-0">
@@ -47,7 +39,6 @@
   			</vx-card>
   	</div>
   </div>
-
 </div>
 </template>
 
