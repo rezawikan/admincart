@@ -25,16 +25,7 @@
           Destination
         </vs-th>
         <vs-th>
-           Courier
-        </vs-th>
-        <vs-th>
-          Type
-        </vs-th>
-        <vs-th>
-          Price
-        </vs-th>
-        <vs-th>
-          Estimation
+           Number of Shipment
         </vs-th>
       </template>
 
@@ -45,18 +36,7 @@
           </vs-td>
 
           <vs-td :data="data[indextr].id">
-            {{data[indextr].courier}}
-          </vs-td>
-
-          <vs-td :data="data[indextr].id">
-            {{data[indextr].type}}
-          </vs-td>
-
-          <vs-td :data="data[indextr].id">
-            {{data[indextr].price}}
-          </vs-td>
-          <vs-td :data="data[indextr].id">
-            {{data[indextr].estimation}}
+            {{data[indextr].shipping_methods}}
           </vs-td>
 
         </vs-tr>

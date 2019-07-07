@@ -22,12 +22,11 @@
       <template slot="thead">
 
         <vs-th>
-          Product Name
-        </vs-th>
-        <vs-th>
           Image
         </vs-th>
-
+        <vs-th>
+          Product Name
+        </vs-th>
         <vs-th>
            Price
         </vs-th>
@@ -44,27 +43,29 @@
 
       <template slot-scope="{data}">
         <vs-tr :key="indextr" v-for="(tr, indextr) in data" >
-
-          <vs-td :data="data[indextr].name">
-            {{data[indextr].name}}
-          </vs-td>
-
           <vs-td :data="data[indextr].id" v-if="data[indextr].images != 0">
             <img :src="data[indextr].images[0].location | DO_SPACES" alt="">
           </vs-td>
-
           <vs-td :data="data[indextr].id" v-else>
             <img :src="require('@/assets/images/logo/logo.png')" alt="">
           </vs-td>
-
-          <vs-td :data="data[indextr].price">
-            {{data[indextr].price | rupiah}}
+          <vs-td :data="data[indextr].name">
+            {{data[indextr].name}}
           </vs-td>
-
+          <vs-td :data="data[indextr].price" v-if="data[indextr].price.length != 'undefined'">
+            <div class="" v-if="data[indextr].price.min != data[indextr].price.max">
+              {{data[indextr].price.min | rupiah}} - {{data[indextr].price.max | rupiah}}
+            </div>
+            <div class="" v-else>
+              {{data[indextr].price.min | rupiah}}
+            </div>
+          </vs-td>
+          <vs-td :data="data[indextr].price" v-else="!data[indextr].price.length">
+            {{data[indextr].price}}
+          </vs-td>
           <vs-td :data="data[indextr].id">
             {{data[indextr].price_varies ? 'Ada' : 'Tidak Ada'}}
           </vs-td>
-
           <vs-td :data="data[indextr].id">
             {{data[indextr].stock_count}}
           </vs-td>
