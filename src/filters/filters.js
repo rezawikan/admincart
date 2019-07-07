@@ -25,6 +25,9 @@ Vue.filter('tailing', function(value, tail) {
 })
 
 Vue.filter('rupiah', function(value) {
+	if (value == null) {
+			return '0';
+	}
 	return value.toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1.")
 })
 

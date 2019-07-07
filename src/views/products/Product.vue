@@ -52,7 +52,7 @@
           <vs-td :data="data[indextr].name">
             {{data[indextr].name}}
           </vs-td>
-          <vs-td :data="data[indextr].price" v-if="data[indextr].price.length != 'undefined'">
+          <vs-td :data="data[indextr].price" v-if="data[indextr].price != null">
             <div class="" v-if="data[indextr].price.min != data[indextr].price.max">
               {{data[indextr].price.min | rupiah}} - {{data[indextr].price.max | rupiah}}
             </div>
@@ -60,8 +60,8 @@
               {{data[indextr].price.min | rupiah}}
             </div>
           </vs-td>
-          <vs-td :data="data[indextr].price" v-else="!data[indextr].price.length">
-            {{data[indextr].price}}
+          <vs-td :data="data[indextr].price" v-else>
+            {{data[indextr].price | rupiah}}
           </vs-td>
           <vs-td :data="data[indextr].id">
             {{data[indextr].price_varies ? 'Ada' : 'Tidak Ada'}}
