@@ -5,11 +5,11 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import vSelect from 'vue-select'
-import { isEmpty, _ } from 'lodash'
+import { isEmpty } from 'lodash'
 export default {
   props: {
     options: {
-      type: Array/Object,
+      value: Array | Object,
       required: true
     }
   },

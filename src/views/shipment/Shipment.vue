@@ -36,8 +36,14 @@
           </vs-td>
 
           <vs-td :data="data[indextr].id">
-            {{data[indextr].shipping_methods}}
+            {{data[indextr].numbers}}
           </vs-td>
+
+          <template class="expand-user" slot="expand">
+            <div class="con-expand-users w-full">
+              <ShipmentList :shippings="tr.shipping_methods"/>
+            </div>
+          </template>
 
         </vs-tr>
       </template>
@@ -50,6 +56,7 @@
 import { mapActions, mapGetters } from 'vuex'
 import Pagination from '@/components/pagination/Pagination.vue'
 import ShipmentCreate from '@/components/shipment/ShipmentCreate.vue'
+import ShipmentList from '@/components/shipment/ShipmentList.vue'
 export default {
   metaInfo: {
     title: 'Ummu Zayn',
@@ -69,6 +76,7 @@ export default {
 
   components: {
     ShipmentCreate,
+    ShipmentList,
     Pagination
   },
 
