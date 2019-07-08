@@ -216,7 +216,7 @@ const router = new Router({
         {
           path: '/location/provinces',
           name: 'Provinces',
-          component: () => import('./views/shipment/Shipment.vue'),
+          component: () => import('./views/location/Province.vue'),
           meta: {
             breadcrumb: [{
                 title: 'Home',
@@ -226,7 +226,7 @@ const router = new Router({
                 title: 'Location',
               },
               {
-                title: 'Shipment',
+                title: 'Provinces',
                 active: true
               }
             ],

@@ -3,7 +3,8 @@ import axios from 'axios'
 
 export default {
     getProvinces({ commit }, payload) {
-      return axios.get(`${process.env.API_URL}provinces?${queryString.stringfy(payload)}`)
+      console.log(payload);
+      return axios.get(`${process.env.API_URL}provinces?${queryString.stringify(payload)}`)
       .then((response) => {
         commit('SET_PROVINCES', response.data.data)
         commit('SET_META_PROVINCES', response.data.meta)
@@ -29,7 +30,7 @@ export default {
       }, (error) => {
           return error.response
       })
-    }.
+    },
     deleteProvinces({ dispatch }, provinceID) {
       return axios.delete(`${process.env.API_URL}provinces/${provinceID}`,)
       .then((response) => {

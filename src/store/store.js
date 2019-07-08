@@ -22,6 +22,7 @@ Vue.use(Vuex)
 import moduleNotifications from './notifications/moduleNotifications.js'
 import moduleAnalytics from './analytics/moduleAnalytics.js'
 import moduleShipping from './shippings/moduleShipping.js'
+import moduleShipment from './shipment/moduleShipment.js'
 import moduleAddress from './addresses/moduleAddress.js'
 import modulePayment from './payments/modulePayment.js'
 import moduleProduct from './products/moduleProduct.js'
@@ -33,6 +34,7 @@ import moduleCart from './cart/moduleCart.js'
 import moduleAuth from './auth/moduleAuth.js'
 
 
+
 export default new Vuex.Store({
     getters,
     mutations,
@@ -41,6 +43,7 @@ export default new Vuex.Store({
     modules: {
         notifications: moduleNotifications,
         analytics: moduleAnalytics,
+        shipment: moduleShipment,
         shippings: moduleShipping,
         addresses: moduleAddress,
         payments: modulePayment,
