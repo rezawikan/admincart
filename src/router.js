@@ -213,6 +213,72 @@ const router = new Router({
             needsAuth: true
           },
         },
+        {
+          path: '/location/provinces',
+          name: 'Provinces',
+          component: () => import('./views/shipment/Shipment.vue'),
+          meta: {
+            breadcrumb: [{
+                title: 'Home',
+                url: '/'
+              },
+              {
+                title: 'Location',
+              },
+              {
+                title: 'Shipment',
+                active: true
+              }
+            ],
+            pageTitle: 'Provinces',
+            guest: false,
+            needsAuth: true
+          },
+        },
+        {
+          path: '/location/cities',
+          name: 'Cities',
+          component: () => import('./views/shipment/Shipment.vue'),
+          meta: {
+            breadcrumb: [{
+                title: 'Home',
+                url: '/'
+              },
+              {
+                title: 'Location',
+              },
+              {
+                title: 'Cities',
+                active: true
+              }
+            ],
+            pageTitle: 'Cities',
+            guest: false,
+            needsAuth: true
+          },
+        },
+        {
+          path: '/location/subdistricts',
+          name: 'Subdistricts',
+          component: () => import('./views/shipment/Shipment.vue'),
+          meta: {
+            breadcrumb: [{
+                title: 'Home',
+                url: '/'
+              },
+              {
+                title: 'Location',
+              },
+              {
+                title: 'Subdistricts',
+                active: true
+              }
+            ],
+            pageTitle: 'Subdistricts',
+            guest: false,
+            needsAuth: true
+          },
+        },
       ],
     },
     // =============================================================================

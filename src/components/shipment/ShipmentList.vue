@@ -1,11 +1,6 @@
 <template lang="html">
   <div>
     <vs-table stripe :data="shippings">
-      <template slot="header">
-        <h7>
-          Courier Details
-        </h7>
-      </template>
       <template slot="thead">
         <vs-th>
           Code

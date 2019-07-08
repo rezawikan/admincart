@@ -262,9 +262,9 @@ export default {
     async showProduct() {
       return axios.get(`${process.env.API_URL}products/${this.$route.params.slug}/edit`)
       .then((response) => {
-
         this.product    = JSON.parse(JSON.stringify(response.data.data))
         this.variations = this.convertVariations(this.product.variations)
+        this.custom     = this.variations.length == 0 ? false : true
       }, (error) => {
           this.error = error.response.data.errors
       })
