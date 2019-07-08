@@ -95,3 +95,9 @@ Vue.filter('convertToSlug', function(value) {
 Vue.filter('DO_SPACES', function(value) {
 	return process.env.DO_SPACES+value
 })
+
+Vue.filter('capitalize', function(value) {
+		if (!value) return ''
+		value = value.toString()
+		return value.charAt(0).toUpperCase() + value.slice(1)
+})

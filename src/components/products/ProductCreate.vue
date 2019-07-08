@@ -3,13 +3,15 @@
     <vs-button  @click="popupActivo=true" color="primary" type="border">Add Product</vs-button>
     <vs-popup class="holamundo"  title="Create Product Name" :active.sync="popupActivo">
         <div class="centerx default-input">
-         <vs-input label-placeholder="Product Name" v-model="form.name"/>
-         <div v-if="notify" class="flex flex-wrap justify-between my-5">
-           <ul>
-             <li v-for="(message, key) in messages" :key="key">{{messages[key][0]}}</li>
-           </ul>
-         </div>
-         <vs-button type="relief" vslor="primary" id="button-create-product" class="vs-con-loading__container mt-3" color="primary" @click="submit">Create</vs-button>
+          <form class="" @submit.prevent="submit">
+            <vs-input label-placeholder="Product Name" v-model="form.name" autofocus="true"/>
+            <div v-if="notify" class="flex flex-wrap justify-between my-5">
+              <ul>
+                <li v-for="(message, key) in messages" :key="key">{{messages[key][0]}}</li>
+              </ul>
+            </div>
+            <vs-button type="relief" vslor="primary" id="button-create-product" class="vs-con-loading__container mt-3" color="primary">Create</vs-button>
+          </form>
        </div>
 
     </vs-popup>

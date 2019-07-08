@@ -35,11 +35,13 @@ export default {
     ]),
 
     changed(value) {
+
       this.reset = true
       if (isEmpty(value))
           return;
 
-          value = value.label ? value.label : value
+          value = this.$options.filters.capitalize(value.label ? value.label : value)
+
       if (this.checkLabel(value) != true) {
           this.saveProductType({name: value}).then((response) => (
              this.$emit('typeCreated', response.data)
@@ -54,7 +56,7 @@ export default {
     },
 
     findLabel(value) {
-      return this.options.filter((x) => { return x.label.includes(value) }).map((x) => {return { id: x.value, name: x.label}})
+      return this.options.filter((x) => { return x.label == value }).map((x) => {return { id: x.value, name: x.label}})
     },
   }
 }

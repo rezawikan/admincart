@@ -32,7 +32,7 @@
           </div>
           <div class="vx-row mb-6">
             <div class="vx-col w-full">
-              <vs-textarea label="Summary" v-model="product.description" name="description" ref="description" v-validate="'required|numeric'" data-vv-validate-on="blur" />
+              <vs-textarea label="Summary" v-model="product.description" name="description" ref="description" v-validate="'required'" data-vv-validate-on="blur" />
               <span class="text-danger text-sm" :show="errors.has('description')">{{ errors.first('description') }}</span>
             </div>
           </div>
@@ -56,24 +56,24 @@
                 </div>
                 <div class="vx-row" v-for="(variant, index) in variation.variations" :key="variant.id">
                   <div :class="custom ? 'sm:w-1/4' : 'sm:w-1/2'" class="vx-col w-full mb-2">
-                    <vs-input class="w-full" label-placeholder="Name"  v-model="variant.name" :name="'variant ' + variant.type.name.toLowerCase().trim()" :ref="'variant ' + variant.type.name.toLowerCase().trim()" v-validate="'required|max:6'" data-vv-validate-on="blur"/>
-                    <span class="text-danger text-sm" :show="errors.has('variant ' + variant.type.name.toLowerCase().trim())">{{ errors.first('variant ' + variant.type.name.toLowerCase().trim()) }}</span>
+                    <vs-input class="w-full" label-placeholder="Name"  v-model="variant.name" :name="'variant ' + variant.type.name.toLowerCase().trim() + ' on index ' + index" :ref="'variant ' + variant.type.name.toLowerCase().trim() + ' on index ' + index" v-validate="'required|max:10'" data-vv-validate-on="blur"/>
+                    <span class="text-danger text-sm" :show="errors.has('variant ' + variant.type.name.toLowerCase().trim() + ' on index ' + index)">{{ errors.first('variant ' + variant.type.name.toLowerCase().trim() + ' on index ' + index) }}</span>
                   </div>
-                  <div class="vx-col lg:w-1/4 md:w-1/4 sm:w-1/6 w-full mb-2" v-if="custom">
-                    <vs-input class="w-full" label-placeholder="base price" v-model="variant.base_price" :name="'base price ' + variant.type.name.toLowerCase().trim()" :ref="'base price ' + variant.type.name.toLowerCase().trim()"  v-validate="'required|numeric'" data-vv-validate-on="blur" />
-                    <span class="text-danger text-sm" :show="errors.has('base price ' + variant.type.name.toLowerCase().trim())">{{ errors.first('base price ' + variant.type.name.toLowerCase().trim()) }}</span>
+                  <div class="vx-col sm:w-1/6 w-full mb-2" v-if="custom">
+                    <vs-input class="w-full" label-placeholder="base price" v-model="variant.base_price" :name="'base price ' + variant.type.name.toLowerCase().trim() + ' on index ' + index" :ref="'base price ' + variant.type.name.toLowerCase().trim() + ' on index ' + index"  v-validate="'required|numeric'" data-vv-validate-on="blur" />
+                    <span class="text-danger text-sm" :show="errors.has('base price ' + variant.type.name.toLowerCase().trim() + ' on index ' + index)">{{ errors.first('base price ' + variant.type.name.toLowerCase().trim() + ' on index ' + index) }}</span>
                   </div>
-                  <div class="vx-col lg:w-1/4 md:w-1/4 sm:w-1/6 w-full mb-2" v-if="custom">
-                    <vs-input class="w-full" label-placeholder="price" v-model="variant.price" :name="'price ' + variant.type.name.toLowerCase().trim()" :ref="'price ' + variant.type.name.toLowerCase().trim()"  v-validate="'required|numeric'" data-vv-validate-on="blur" />
-                    <span class="text-danger text-sm" :show="errors.has('price ' + variant.type.name.toLowerCase().trim())">{{ errors.first('price ' + variant.type.name.toLowerCase().trim()) }}</span>
+                  <div class="vx-col sm:w-1/6 w-full mb-2" v-if="custom">
+                    <vs-input class="w-full" label-placeholder="price" v-model="variant.price" :name="'price ' + variant.type.name.toLowerCase().trim() + ' on index ' + index" :ref="'price ' + variant.type.name.toLowerCase().trim() + ' on index ' + index"  v-validate="'required|numeric'" data-vv-validate-on="blur" />
+                    <span class="text-danger text-sm" :show="errors.has('price ' + variant.type.name.toLowerCase().trim() + ' on index ' + index)">{{ errors.first('price ' + variant.type.name.toLowerCase().trim() + ' on index ' + index) }}</span>
                   </div>
-                  <div class="vx-col lg:w-1/4 md:w-1/4 sm:w-1/6 w-full mb-2" v-if="custom">
-                    <vs-input class="w-full" label-placeholder="Weight in gram" v-model="variant.weight" :name="'weight ' + variant.type.name.toLowerCase().trim()" :ref="'weight ' + variant.type.name.toLowerCase().trim()"  v-validate="'required|numeric'" data-vv-validate-on="blur"/>
-                    <span class="text-danger text-sm" :show="errors.has('weight ' + variant.type.name.toLowerCase().trim())">{{ errors.first('weight ' + variant.type.name.toLowerCase().trim()) }}</span>
+                  <div class="vx-col sm:w-1/6 w-full mb-2" v-if="custom">
+                    <vs-input class="w-full" label-placeholder="Weight in gram" v-model="variant.weight" :name="'weight ' + variant.type.name.toLowerCase().trim() + ' on index ' + index" :ref="'weight ' + variant.type.name.toLowerCase().trim() + ' on index ' + index"  v-validate="'required|numeric'" data-vv-validate-on="blur"/>
+                    <span class="text-danger text-sm" :show="errors.has('weight ' + variant.type.name.toLowerCase().trim() + ' on index ' + index)">{{ errors.first('weight ' + variant.type.name.toLowerCase().trim() + ' on index ' + index) }}</span>
                   </div>
-                  <div :class="custom ? 'lg:w-1/4 md:w-1/3 sm:w-1/6' : 'lg:w-1/3 sm:w-1/3 md:w-1/3'" class="vx-col w-full mb-2">
-                    <vs-input class="w-full" label-placeholder="Stock" v-model="variant.stock_count" :name="'stock ' + variant.type.name.toLowerCase().trim()" :ref="'stock ' + variant.type.name.toLowerCase().trim()"  v-validate="'required|numeric'" data-vv-validate-on="blur"/>
-                    <span class="text-danger text-sm" :show="errors.has('stock ' + variant.type.name.toLowerCase().trim())">{{ errors.first('stock ' + variant.type.name.toLowerCase().trim()) }}</span>
+                  <div :class="custom ? 'sm:w-1/6' : 'sm:w-1/3'" class="vx-col w-full mb-2">
+                    <vs-input class="w-full" label-placeholder="Stock" v-model="variant.stock_count" :name="'stock ' + variant.type.name.toLowerCase().trim() + ' on index ' + index" :ref="'stock ' + variant.type.name.toLowerCase().trim() + ' on index ' + index"  v-validate="'required|numeric'" data-vv-validate-on="blur"/>
+                    <span class="text-danger text-sm" :show="errors.has('stock ' + variant.type.name.toLowerCase().trim() + ' on index ' + index)">{{ errors.first('stock ' + variant.type.name.toLowerCase().trim() + ' on index ' + index) }}</span>
                   </div>
                   <div :class="custom ? 'sm:w-1/8' : 'sm:w-1/8 md:w-1/8'" class="vx-col mb-2">
                     <div class="remove">

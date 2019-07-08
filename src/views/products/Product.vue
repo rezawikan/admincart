@@ -64,7 +64,7 @@
             {{data[indextr].price | rupiah}}
           </vs-td>
           <vs-td :data="data[indextr].id">
-            {{data[indextr].price_varies ? 'Ada' : 'Tidak Ada'}}
+            {{data[indextr].price_varies && data[indextr].price.min != data[indextr].price.max ? 'Ada' : 'Tidak Ada'}}
           </vs-td>
           <vs-td :data="data[indextr].id">
             {{data[indextr].stock_count}}
