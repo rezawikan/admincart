@@ -106,7 +106,6 @@ import ProductType from '@/components/product-type/ProductType.vue'
 import Upload from '@/components/upload/Upload.vue'
 import { slugString } from '../../helpers/slug'
 import axios from 'axios'
-import _ from 'lodash'
 
 export default {
   metaInfo: {
@@ -177,6 +176,12 @@ export default {
 
       this.$validator.validateAll().then(result => {
         if(result) {
+          if (this.custom) {
+              this.product.price = null
+              this.product.weight = null
+              this.product.base_price = null
+          }
+          
           this.saveProduct({
               name: this.product.name,
               slug: this.product.slug,
@@ -188,7 +193,7 @@ export default {
               variations: this.variations,
               delete: this.delete,
               origin: this.$route.params.slug
-          }).then((response) => {
+          }).then(() => {
               this.$router.replace({ name: 'products' })
           })
         } else {
@@ -264,7 +269,7 @@ export default {
       .then((response) => {
         this.product    = JSON.parse(JSON.stringify(response.data.data))
         this.variations = this.convertVariations(this.product.variations)
-        this.custom     = this.variations.length == 0 ? false : true
+        this.custom     = (this.product.price == null || this.product.base_price == null || this.product.weight == null)
       }, (error) => {
           this.error = error.response.data.errors
       })

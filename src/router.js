@@ -238,7 +238,7 @@ const router = new Router({
         {
           path: '/location/cities',
           name: 'Cities',
-          component: () => import('./views/shipment/Shipment.vue'),
+          component: () => import('./views/location/City.vue'),
           meta: {
             breadcrumb: [{
                 title: 'Home',
@@ -260,7 +260,7 @@ const router = new Router({
         {
           path: '/location/subdistricts',
           name: 'Subdistricts',
-          component: () => import('./views/shipment/Shipment.vue'),
+          component: () => import('./views/location/Subdistrict.vue'),
           meta: {
             breadcrumb: [{
                 title: 'Home',

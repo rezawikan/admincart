@@ -1,9 +1,9 @@
 <template lang="html">
-  <div id="load-provinces-listing" class="data-list-container">
+  <div id="load-subdistrict-listing" class="data-list-container">
     <div slot="header" class="flex flex-wrap-reverse items-center flex-grow justify-between">
 
       <div class="flex flex-wrap-reverse items-center">
-        <CreateProvince class="p-3 mb-4 mr-4 cursor-pointer flex items-center justify-between text-lg font-medium text-base text-primary"/>
+        <CreateSubdistrict class="p-3 mb-4 mr-4 cursor-pointer flex items-center justify-between text-lg font-medium text-base text-primary"/>
       </div>
 
       <div class="customize-search">
@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <vs-table :data="provinces">
+    <vs-table :data="subdistricts">
       <template slot="thead">
         <vs-th>
           ID
@@ -46,11 +46,11 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import Pagination from '@/components/pagination/Pagination.vue'
-import CreateProvince from '@/components/location/LocationCreateProvince.vue'
+import CreateSubdistrict from '@/components/location/LocationCreateSubdistrict.vue'
 export default {
   metaInfo: {
     title: 'Ummu Zayn',
-    titleTemplate: '%s - Provinces',
+    titleTemplate: '%s - Subdistrict',
     htmlAttrs: {
       lang: 'en',
       amp: true
@@ -65,26 +65,26 @@ export default {
   },
 
   components: {
-    CreateProvince,
+    CreateSubdistrict,
     Pagination
   },
 
   watch: {
     '$route.query'(query){
       this.$vs.loading({
-        container: '#load-provinces-listing',
+        container: '#load-subdistrict-listing',
         scale: 0.45
       })
 
-      this.getProvinces({ ...this.$route.params, ...query, pagination: true }).then(() => {
-        this.$vs.loading.close('#load-provinces-listing > .con-vs-loading')
+      this.getSubdistricts({ ...this.$route.params, ...query, pagination: true }).then(() => {
+        this.$vs.loading.close('#load-subdistrict-listing > .con-vs-loading')
       })
     }
   },
 
   methods: {
     ...mapActions('shipment',[
-      'getProvinces'
+      'getSubdistricts'
     ]),
     keyupSearch($event) {
       if (!$event.target.value) {
@@ -106,13 +106,13 @@ export default {
 
   computed: {
     ...mapGetters({
-      provinces: 'shipment/provinces',
-      meta: 'shipment/metaProvinces'
+      subdistricts: 'shipment/subdistricts',
+      meta: 'shipment/metaSubdistricts'
     })
   },
 
   created () {
-    this.getProvinces({ ...this.$route.params, ...this.$route.query, pagination: true })
+    this.getSubdistricts({ ...this.$route.params, ...this.$route.query, pagination: true })
     if (this.$route.query.name) {
         this.reset = true
     }

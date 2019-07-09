@@ -1,9 +1,9 @@
 <template lang="html">
-  <div id="load-provinces-listing" class="data-list-container">
+  <div id="load-cities-listing" class="data-list-container">
     <div slot="header" class="flex flex-wrap-reverse items-center flex-grow justify-between">
 
       <div class="flex flex-wrap-reverse items-center">
-        <CreateProvince class="p-3 mb-4 mr-4 cursor-pointer flex items-center justify-between text-lg font-medium text-base text-primary"/>
+        <CreateCity class="p-3 mb-4 mr-4 cursor-pointer flex items-center justify-between text-lg font-medium text-base text-primary"/>
       </div>
 
       <div class="customize-search">
@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <vs-table :data="provinces">
+    <vs-table :data="cities">
       <template slot="thead">
         <vs-th>
           ID
@@ -46,11 +46,11 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import Pagination from '@/components/pagination/Pagination.vue'
-import CreateProvince from '@/components/location/LocationCreateProvince.vue'
+import CreateCity from '@/components/location/LocationCreateCity.vue'
 export default {
   metaInfo: {
     title: 'Ummu Zayn',
-    titleTemplate: '%s - Provinces',
+    titleTemplate: '%s - Cities',
     htmlAttrs: {
       lang: 'en',
       amp: true
@@ -65,26 +65,26 @@ export default {
   },
 
   components: {
-    CreateProvince,
+    CreateCity,
     Pagination
   },
 
   watch: {
     '$route.query'(query){
       this.$vs.loading({
-        container: '#load-provinces-listing',
+        container: '#load-cities-listing',
         scale: 0.45
       })
 
-      this.getProvinces({ ...this.$route.params, ...query, pagination: true }).then(() => {
-        this.$vs.loading.close('#load-provinces-listing > .con-vs-loading')
+      this.getCities({ ...this.$route.params, ...query, pagination: true }).then(() => {
+        this.$vs.loading.close('#load-cities-listing > .con-vs-loading')
       })
     }
   },
 
   methods: {
     ...mapActions('shipment',[
-      'getProvinces'
+      'getCities'
     ]),
     keyupSearch($event) {
       if (!$event.target.value) {
@@ -106,13 +106,13 @@ export default {
 
   computed: {
     ...mapGetters({
-      provinces: 'shipment/provinces',
-      meta: 'shipment/metaProvinces'
+      cities: 'shipment/cities',
+      meta: 'shipment/metaCities'
     })
   },
 
   created () {
-    this.getProvinces({ ...this.$route.params, ...this.$route.query, pagination: true })
+    this.getCities({ ...this.$route.params, ...this.$route.query, pagination: true })
     if (this.$route.query.name) {
         this.reset = true
     }

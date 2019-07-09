@@ -135,11 +135,16 @@ export default {
           'getProducts'
         ]),
         keyupSearch($event) {
-          this.reset = true
-          this.$router.replace({query: {
-            name :$event.target.value,
-            page: 1
-          }})
+          if (!$event.target.value) {
+                this.resetSearch()
+          } else {
+              this.reset = true
+              this.$router.replace({query: {
+                name :$event.target.value,
+                page: 1
+              }})
+          }
+
         },
         resetSearch() {
           this.reset = false
