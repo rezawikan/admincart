@@ -5,7 +5,30 @@
         <div class="vx-row mb-6">
           <div class="vx-col w-full">
             <label class="vs-input--label">Customer</label>
-            <CustomerDropdown mode="select" v-model="customer"/>
+            <CustomerDropdown
+            mode="select"
+            v-model="customer"
+            name="customer"
+            v-validate="'required'"
+            />
+            <span class="text-danger text-sm" :show="errors.has('customer')">{{ errors.first('customer') }}</span>
+          </div>
+        </div>
+      </vx-card>
+    </div>
+    <div class="vx-col w-full mb-base">
+      <vx-card>
+        <div class="vx-row mb-6">
+          <div class="vx-col w-full">
+            <label class="vs-input--label">Order Date</label>
+            <flat-pickr
+            class="vs-inputx vs-input--input normal"
+            :config="configdateTimePicker"
+            v-model="created_at"
+            name="order date"
+            v-validate="'required'"
+            />
+            <span class="text-danger text-sm" :show="errors.has('order date')">{{ errors.first('order date') }}</span>
           </div>
         </div>
       </vx-card>
@@ -130,11 +153,15 @@
 
 <script>
 import axios from 'axios'
-import { mapActions, mapGetters, mapMutations } from 'vuex'
-import CustomerDropdown from '@/components/form/CustomerDropdown'
+import 'flatpickr/dist/flatpickr.css'
+import 'flatpickr/dist/plugins/confirmDate/confirmDate.css';
+import ConfirmDatePlugin from 'flatpickr/dist/plugins/confirmDate/confirmDate.js';
+import flatPickr from 'vue-flatpickr-component'
 import ProductList from '@/components/products/ProductList'
-import ShippingAddress from '@/components/addresses/ShippingAddress'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import CartOverview from '@/components/cart/CartOverview.vue'
+import CustomerDropdown from '@/components/form/CustomerDropdown'
+import ShippingAddress from '@/components/addresses/ShippingAddress'
 import PaymentMethods from '@/components/payments/PaymentMethods.vue'
 import ShippingMethodsDropdown from '@/components/form/ShippingMethodsDropdown'
 
@@ -155,17 +182,36 @@ export default {
           payment_method_id: null
         },
         addressShow: false,
-        discount: 0
+        discount: 0,
+        created_at: null,
+        configdateTimePicker: {
+          plugins: [new ConfirmDatePlugin({
+            confirmIcon: "-", // your icon's html, if you wish to override
+            confirmText: "Confirm ",
+            showAlways: false,
+            theme: "light" // or "dark"
+          })],
+          defaultHour: new Date().getHours(),
+          defaultMinute: new Date().getMinutes(),
+          enableTime: true,
+          dateFormat: 'Y-m-d H:i:S',
+          altInput: true,
+          enableSeconds: true,
+          enableTime: true,
+          disableMobile: true
+
+        }
       }
   },
 
   components: {
+    ShippingMethodsDropdown,
     CustomerDropdown,
     ShippingAddress,
     PaymentMethods,
-    ShippingMethodsDropdown,
     CartOverview,
-    ProductList
+    ProductList,
+    flatPickr
   },
 
   computed: {
@@ -225,7 +271,8 @@ export default {
                 ...this.form,
                 shipping_method_id: this.shippingMethodId,
                 user_id: this.customer.id,
-                discount: this.discount
+                discount: this.discount,
+                created_at: this.created_at
               }).then(() => {
                   this.$router.replace({ path: '/orders' })
               })
