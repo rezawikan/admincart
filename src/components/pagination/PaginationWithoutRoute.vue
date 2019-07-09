@@ -63,7 +63,7 @@ import _ from 'lodash'
 export default {
   props: {
     meta: {
-      type: Object,
+      value: Object | Array,
       required: true
     },
     queries: {

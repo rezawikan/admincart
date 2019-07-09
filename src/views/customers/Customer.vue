@@ -62,8 +62,7 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import CreateCustomer from '@/components/customers/CreateCustomer.vue'
 import Pagination from '@/components/pagination/Pagination.vue'
 export default {

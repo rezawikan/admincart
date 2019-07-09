@@ -78,7 +78,10 @@
             <PaymentMethods
             :paymentMethods="paymentMethods"
             v-model="form.payment_method_id"
+            name="payment method"
+            v-validate="'required'"
             />
+            <span class="text-danger text-sm" :show="errors.has('payment method')">{{ errors.first('payment method') }}</span>
           </div>
           <div class="vx-col w-full mb-6">
             <template v-if="defaultPayment">
@@ -121,7 +124,7 @@
         </div>
       </vx-card>
     </div>
-    <vs-button id="create-order" class="vs-con-loading__container" type="relief" vslor="primary" color="primary" @click.prevent="order">Place Order</vs-button>
+    <vs-button id="create-order" class="vs-con-loading__container" type="relief" vslor="primary" color="primary" @click.prevent="order" :disabled="this.errors.items.length == 0 ? false : true">Place Order</vs-button>
   </div>
 </template>
 
@@ -216,18 +219,22 @@ export default {
           scale: 0.45
         })
 
-        return axios.post(`${process.env.API_URL}public-orders`, {
-          ...this.form,
-          shipping_method_id: this.shippingMethodId,
-          user_id: this.customer.id,
-          discount: this.discount
-        }).then(() => {
-          // this.$router.replace({query: {
-          //   name :$event.target.value,
-          //   page: 1
-          // }})
-          this.$vs.loading.close('#create-order > .con-vs-loading')
+        this.$validator.validateAll().then(result => {
+          if (result) {
+              axios.post(`${process.env.API_URL}public-orders`, {
+                ...this.form,
+                shipping_method_id: this.shippingMethodId,
+                user_id: this.customer.id,
+                discount: this.discount
+              }).then(() => {
+                  this.$router.replace({ path: '/orders' })
+              })
+          } else {
+              this.$vs.loading.close('#create-order > .con-vs-loading')
+          }
         })
+
+
       }
   },
 
