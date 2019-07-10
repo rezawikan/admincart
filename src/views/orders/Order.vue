@@ -1,13 +1,11 @@
 <template lang="html">
   <div id="load-orders-listing" class="data-list-container">
     <div slot="header" class="flex flex-wrap-reverse items-center flex-grow justify-between">
-
       <div class="flex flex-wrap-reverse items-center">
         <div class="centerx">
           <vs-button href="/orders/create" color="primary" type="border">Add Order</vs-button>
         </div>
       </div>
-
       <div class="customize-search">
         <div class="con-input-search vs-table--search">
           <input type="text" class="input-search vs-table--search-input" v-model="search" @keyup.enter="keyupSearch">
@@ -19,9 +17,6 @@
       </div>
     </div>
     <vs-table :data="orders">
-      <template slot="header">
-
-      </template>
       <template slot="thead">
         <vs-th>
           ID
@@ -42,7 +37,6 @@
           Order Date
         </vs-th>
       </template>
-
       <template slot-scope="{data}">
         <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data" >
           <vs-td :data="data[indextr].id">
@@ -70,7 +64,6 @@
                 <vs-list-item
                 :key="product.id"
                 v-for="product in tr.products"
-
                 :subtitle="product.product.name+ ' / ' + product.name + ' / ' + product.type.name"
                 >
                   <vs-chip color="primary">
@@ -133,8 +126,7 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import Pagination from '@/components/pagination/Pagination.vue'
 export default {
   metaInfo: {

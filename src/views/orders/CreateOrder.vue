@@ -197,7 +197,6 @@ export default {
           dateFormat: 'Y-m-d H:i:S',
           altInput: true,
           enableSeconds: true,
-          enableTime: true,
           disableMobile: true
 
         }

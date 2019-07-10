@@ -46,7 +46,7 @@
 import ProvinceDropdown from '@/components/form/ProvinceDropdown'
 import CityDropdown from '@/components/form/CityDropdown'
 import SubdistrictDropdown from '@/components/form/SubdistrictDropdown'
-import { mapActions, mapGetters  } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   components: {
      ProvinceDropdown,

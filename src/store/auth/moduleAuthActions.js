@@ -44,7 +44,7 @@ export default {
       setHttpToken(token)
     },
 
-    checkTokenExists({ commit, dispatch }, token) {
+    checkTokenExists() {
       return localforage.getItem('authtoken').then((token) => {
           if (isEmpty(token)) {
               return Promise.reject('NO_STORAGE_TOKEN')
@@ -54,12 +54,12 @@ export default {
     },
 
     logout({ dispatch }) {
-        return axios.post(`${process.env.API_URL}api/logout`).then((response) => {
+        return axios.post(`${process.env.API_URL}api/logout`).then(() => {
             dispatch('clearAuth')
         })
     },
 
-    clearAuth({ commit }, token) {
+    clearAuth({ commit }) {
         commit('SET_AUTHENTICATED', false)
         commit('SET_USER_DATA', null)
         commit('SET_TOKEN', null)
