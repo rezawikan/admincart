@@ -2,6 +2,7 @@
   <div class="centerx">
     <vs-button  @click="popupActivo=true" color="primary" type="border">Add Customer</vs-button>
     <vs-popup class="holamundo"  title="Create Customer" :active.sync="popupActivo">
+      <form @submit.prevent="submit">
         <div class="vx-col w-full mb-base">
           <div class="vx-row mb-6">
             <div class="vx-col w-full">
@@ -27,14 +28,14 @@
               <span class="text-danger text-sm" v-show="errors.has('password_confirmation')">{{ errors.first('password_confirmation') }}</span>
             </div>
           </div>
-         <div v-if="notify" class="flex flex-wrap justify-between my-5">
+          <div v-if="notify" class="flex flex-wrap justify-between my-5">
            <ul>
              <li v-for="(message, key) in messages" :key="key">{{messages[key][0]}}</li>
            </ul>
-         </div>
-         <vs-button type="relief" vslor="primary" id="button-create-user" class="vs-con-loading__container mt-3" color="primary" @click="submit">Create</vs-button>
-       </div>
-
+          </div>
+          <vs-button type="relief" vslor="primary" id="button-create-user" class="vs-con-loading__container mt-3" color="primary">Create</vs-button>
+        </div>
+      </form>
     </vs-popup>
   </div>
 </template>
@@ -71,11 +72,14 @@ export default {
         }).then((response) => {
 
             if (isEmpty(response.data.errors)) {
-              this.popupActivo = false
-
+                this.popupActivo = false
+                this.form.email = ''
+                this.form.name = ''
+                this.form.password = ''
+                this.form.password_confirmation = ''
             } else {
-              this.messages = response.data.errors
-              this.notify = true
+                this.messages = response.data.errors
+                this.notify = true
             }
 
             this.$vs.loading.close('#button-create-user > .con-vs-loading')

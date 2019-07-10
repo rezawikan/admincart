@@ -27,10 +27,23 @@ export default [
     icon: "HomeIcon",
   },
   {
-    url: "/products",
+    url: null,
     name: "Products",
     slug: "products",
     icon: "ListIcon",
+    submenu: [{
+        url: "/products",
+        name: "All",
+      },
+      {
+        url: "/products?status=live",
+        name: "Live",
+      },
+      {
+        url: "/products?status=draft",
+        name: "Draft",
+      }
+    ]
   },
   {
     url: "/stocks",

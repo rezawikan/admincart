@@ -3,6 +3,13 @@
     <div class="vx-col w-full mb-base">
       <vx-card :title="'Update '+this.product.name">
           <div class="vx-row mb-6">
+            <div class="vx-col w-full mb-5">
+              <label>Status</label>
+              <vs-switch style="width:80px;" class="mt-2" v-model="isLive">
+                <span slot="on">Live</span>
+                <span slot="off">Draft</span>
+              </vs-switch>
+            </div>
             <div class="vx-col w-full">
               <vs-input class="w-full" label="Name" v-model="product.name" />
             </div>
@@ -126,6 +133,7 @@ export default {
       error: null,
       temp: {},
       custom: false,
+      isLive: false,
       action: `${process.env.API_URL}images`,
     }
   },
@@ -181,7 +189,7 @@ export default {
               this.product.weight = null
               this.product.base_price = null
           }
-          
+
           this.saveProduct({
               name: this.product.name,
               slug: this.product.slug,
@@ -192,7 +200,8 @@ export default {
               base_price: this.product.base_price,
               variations: this.variations,
               delete: this.delete,
-              origin: this.$route.params.slug
+              origin: this.$route.params.slug,
+              status: this.isLive
           }).then(() => {
               this.$router.replace({ name: 'products' })
           })
@@ -270,6 +279,7 @@ export default {
         this.product    = JSON.parse(JSON.stringify(response.data.data))
         this.variations = this.convertVariations(this.product.variations)
         this.custom     = (this.product.price == null || this.product.base_price == null || this.product.weight == null)
+        this.isLive     = this.product.status
       }, (error) => {
           this.error = error.response.data.errors
       })

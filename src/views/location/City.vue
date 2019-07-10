@@ -33,7 +33,7 @@
           </vs-td>
 
           <vs-td :data="data[indextr].id">
-            {{data[indextr].name}}
+            {{data[indextr].name}} - {{data[indextr].capital}}
           </vs-td>
 
         </vs-tr>

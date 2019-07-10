@@ -70,9 +70,8 @@
             {{data[indextr].stock_count}}
           </vs-td>
           <vs-td :data="data[indextr].id">
-            <router-link :to="{ name: 'product-edit', params: { slug:data[indextr].slug } }">Edit</router-link>
-            <vs-divider/>
-            <!-- <router-link :to="{ name: 'product-edit', params: { slug:'asd' } }">Delete</router-link> -->
+            <vs-button size="small" color="primary" type="filled" :href="{url: `/products/${data[indextr].slug}/edit`}">Edit</vs-button> |
+            <vs-button size="small" color="danger" type="filled">Delete</vs-button>
           </vs-td>
         </vs-tr>
       </template>
@@ -87,14 +86,23 @@ import Pagination from '@/components/pagination/Pagination.vue'
 import ProductCreate from '@/components/products/ProductCreate.vue'
 
 export default {
-    metaInfo: {
-      title: 'Ummu Zayn',
-      titleTemplate: '%s - Products',
-      htmlAttrs: {
-        lang: 'en',
-        amp: true
+    metaInfo() {
+      let status = this.$route.query.status
+
+      if (status != null) {
+          status = status.charAt(0).toUpperCase() + status.slice(1)
+      }
+
+      return {
+        title: 'Ummu Zayn',
+        titleTemplate: `%s - Products ${status != null ? status : 'All'}`,
+        htmlAttrs: {
+          lang: 'en',
+          amp: true
+        }
       }
     },
+
     data() {
         return {
           notify: false,
