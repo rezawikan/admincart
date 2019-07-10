@@ -43,8 +43,8 @@
             </vs-td>
 
             <vs-td :data="data[i].id">
-              <vs-button v-if="data[i].product.stock_count == 0" color="warning" size="small" :disabled="true">Out of Stock</vs-button>
-              <vs-button v-if="!hasCart(data[i].id) && data[i].product.stock_count != 0" size="small" @click.prevent="add(data[i].id)" :disabled="customer.id == undefined">Add Cart</vs-button>
+              <vs-button v-if="data[i].stock == 0" color="warning" size="small" :disabled="true">Out of Stock</vs-button>
+              <vs-button v-if="!hasCart(data[i].id) && data[i].stock != 0" size="small" @click.prevent="add(data[i].id)" :disabled="customer.id == undefined">Add Cart</vs-button>
               <vs-button v-if="hasCart(data[i].id)" size="small" @click.prevent="add(data[i].id)" :disabled="customer.id == undefined">Add Cart ({{countCart(data[i].id).quantity}})
               </vs-button>
             </vs-td>

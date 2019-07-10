@@ -29,9 +29,6 @@
         <vs-th>
           Total Product
         </vs-th>
-        <!-- <vs-th>
-           Courier
-        </vs-th> -->
         <vs-th>
           Subtotal
         </vs-th>
@@ -41,6 +38,9 @@
         <vs-th>
           Status
         </vs-th>
+        <vs-th>
+          Order Date
+        </vs-th>
       </template>
 
       <template slot-scope="{data}">
@@ -48,24 +48,20 @@
           <vs-td :data="data[indextr].id">
             {{data[indextr].id}}
           </vs-td>
-
           <vs-td :data="data[indextr].products.length">
             {{data[indextr].quantity}}
           </vs-td>
-
-          <!-- <vs-td :data="data[indextr].shippingMethod.courier">
-            {{data[indextr].shippingMethod.courier}}
-          </vs-td> -->
-
           <vs-td :data="data[indextr].subtotal">
             {{data[indextr].subtotal | rupiah }}
           </vs-td>
-
           <vs-td :data="data[indextr].total">
             {{data[indextr].total | rupiah}}
           </vs-td>
           <vs-td :data="data[indextr].status">
             {{data[indextr].status}}
+          </vs-td>
+          <vs-td :data="data[indextr].created_at">
+            {{data[indextr].created_at}}
           </vs-td>
           <template class="expand-user" slot="expand">
             <div class="con-expand-users w-full">

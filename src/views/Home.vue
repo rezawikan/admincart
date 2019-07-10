@@ -18,7 +18,7 @@
           <div class="flex">
             <div>
               <p class="mb-1 font-semibold">Total</p>
-              <p class="text-3xl"><sup class="text-base mr-1">Rp</sup>{{ lastMonthamountRevenue }}</p>
+              <p class="text-3xl"><sup class="text-base mr-1">Rp</sup>{{ lastMonthamountRevenue | rupiah }}</p>
             </div>
           </div>
           <vue-apex-charts type=line height=266 :options="revenueLastMonth.chartOptions" :series="revenueLastMonth.series" />
@@ -31,7 +31,7 @@
           <div class="flex">
             <div>
               <p class="mb-1 font-semibold">Total</p>
-              <p class="text-3xl"><sup class="text-base mr-1">Rp</sup>{{ thisMonthamountRevenue }}</p>
+              <p class="text-3xl"><sup class="text-base mr-1">Rp</sup>{{ thisMonthamountRevenue | rupiah }}</p>
             </div>
           </div>
           <vue-apex-charts type=line height=266 :options="revenueThisMonth.chartOptions" :series="revenueThisMonth.series" />

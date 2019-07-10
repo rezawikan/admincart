@@ -78,7 +78,7 @@ export default {
               this.notify = true
             }
 
-            this.$vs.loading.close('#button-create-product > .con-vs-loading')
+            this.$vs.loading.close('#button-create-user > .con-vs-loading')
         })
     }
   }
