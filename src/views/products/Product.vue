@@ -87,10 +87,9 @@ import ProductCreate from '@/components/products/ProductCreate.vue'
 
 export default {
     metaInfo() {
-      let status = this.$route.query.status
-
-      if (status != null) {
-          status = status.charAt(0).toUpperCase() + status.slice(1)
+      let status = null
+      if (this.status != null) {
+          status = this.status.charAt(0).toUpperCase() + this.status.slice(1)
       }
 
       return {
@@ -107,14 +106,15 @@ export default {
         return {
           notify: false,
           messages: '',
-          search: this.$route.query.name,
           reset: false
         }
     },
+
     components: {
       Pagination,
       ProductCreate
     },
+
     watch: {
       '$route.query'(query){
         this.$vs.loading({
@@ -122,21 +122,33 @@ export default {
           scale: 0.45
         })
 
+        if (this) {
+
+        }
+
         this.getProducts({ ...this.$route.params, ...query }).then(() => {
           this.$vs.loading.close('#load-products-listing > .con-vs-loading')
         })
       }
     },
+
     filters: {
       DO_SPACES: function (value) {
         return process.env.DO_SPACES+value
       }
     },
+
     computed: {
       ...mapGetters({
         products: 'products/products',
         meta: 'products/meta'
-      })
+      }),
+      status() {
+        return this.$route.query.status || null
+      },
+      search() {
+        return this.$route.query.name || null
+      }
     },
     methods: {
         ...mapActions('products', [
@@ -148,6 +160,7 @@ export default {
           } else {
               this.reset = true
               this.$router.replace({query: {
+                status: this.status,
                 name :$event.target.value,
                 page: 1
               }})
@@ -157,7 +170,9 @@ export default {
         resetSearch() {
           this.reset = false
           this.search = ''
-          this.$router.replace({query: {}})
+          this.$router.replace({query: {
+            status: this.status
+          }})
         }
     },
     created(){

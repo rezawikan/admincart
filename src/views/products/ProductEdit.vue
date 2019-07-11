@@ -5,10 +5,7 @@
           <div class="vx-row mb-6">
             <div class="vx-col w-full mb-5">
               <label>Status</label>
-              <vs-switch style="width:80px;" class="mt-2" v-model="isLive">
-                <span slot="on">Live</span>
-                <span slot="off">Draft</span>
-              </vs-switch>
+              <vs-switch class="mt-2" v-model="isLive"/>
             </div>
             <div class="vx-col w-full">
               <vs-input class="w-full" label="Name" v-model="product.name" />
@@ -203,7 +200,7 @@ export default {
               origin: this.$route.params.slug,
               status: this.isLive
           }).then(() => {
-              this.$router.replace({ name: 'products' })
+              this.$router.replace({ name: 'products', query: { status: this.isLive ? 'live' : 'draft' }})
           })
         } else {
             this.$vs.loading.close('#button-save-product > .con-vs-loading')

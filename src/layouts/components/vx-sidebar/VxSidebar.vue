@@ -39,7 +39,7 @@
                         <template v-else-if="!sidebarItem.header">
 
                             <!-- IF IT'S SINGLE ITEM -->
-                            <vx-sidebar-item ref="sidebarLink" :key="`sidebarItem-${index}`" v-if="!sidebarItem.submenu" :index="index" :to="sidebarItem.slug != 'external' ? sidebarItem.url : ''" :href="sidebarItem.slug == 'external' ? sidebarItem.url : ''" :icon="sidebarItem.icon" :target="sidebarItem.target" :isDisabled="sidebarItem.isDisabled">
+                            <vx-sidebar-item ref="sidebarLink" :key="`sidebarItem-${index}`" v-if="!sidebarItem.submenu" :index="index" :to="sidebarItem.slug != 'external' ? sidebarItem.url : ''" :href="sidebarItem.slug.includes('external') ? sidebarItem.url : ''" :icon="sidebarItem.icon" :target="sidebarItem.target" :isDisabled="sidebarItem.isDisabled">
                                 <span v-show="!sidebarItemsMin" class="truncate">{{ sidebarItem.name }}</span>
                                 <vs-chip class="ml-auto" :color="sidebarItem.tagColor" v-if="sidebarItem.tag && (isMouseEnter || !reduce)">{{ sidebarItem.tag }}</vs-chip>
                             </vx-sidebar-item>
@@ -130,7 +130,7 @@ export default {
                 let func = function(sidebarItem) {
                     if (sidebarItem.submenu) {
                         sidebarItem.submenu.forEach((item) => {
-                            if (path == item.url) { open = true }
+                            if (path.includes(item.url)) { open = true }
                             else if (item.submenu) { func(item) }
                         })
                     }

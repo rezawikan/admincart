@@ -152,6 +152,7 @@ export default {
 
   watch: {
     '$route.query'(query){
+      console.log(query);
       this.$vs.loading({
         container: '#load-orders-listing',
         scale: 0.45
