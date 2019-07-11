@@ -78,11 +78,11 @@ export default {
       this.reset = query.length > 0 ? true : false
 
       if (query.length >= 3) {
-          this.getProductVariations({ name: query })
+          this.getProductVariations({ name: query, status: 'live' })
       }
 
       if (query.length == 0) {
-          this.getProductVariations()
+          this.getProductVariations({ status: 'live' })
       }
     }
   },
@@ -127,7 +127,7 @@ export default {
     },
     resetSearch() {
       if (this.search >= 3) {
-          this.getProductVariations()
+          this.getProductVariations({ status: 'live' })
       }
 
       this.search = ''
@@ -139,7 +139,7 @@ export default {
         scale: 0.45
       })
 
-      let data = { page: query.query.page }
+      let data = { status: 'live', page: query.query.page }
       if (this.search) {
           data = Object.assign({ name: this.search }, data)
       }
@@ -163,7 +163,7 @@ export default {
   },
 
   created() {
-    this.getProductVariations()
+    this.getProductVariations({ status: 'live' })
   }
 }
 </script>
