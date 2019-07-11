@@ -56,7 +56,7 @@
               <div v-for="(variation, key) in variations" :key="key">
                 <div class="pb-3">
                   <h6 class="inline pr-3">{{ variation.name }}</h6>
-                  <font-awesome-icon icon="trash" @click="removeType(key, variation.variations)"></font-awesome-icon>
+                  <font-awesome-icon icon="trash" @click="removeType(key, variation.variations)" v-if="deleteAble(variation) == false"></font-awesome-icon>
                 </div>
                 <div class="vx-row" v-for="(variant, index) in variation.variations" :key="variant.id">
                   <div :class="custom ? 'sm:w-1/4' : 'sm:w-1/2'" class="vx-col w-full mb-2">
@@ -171,14 +171,14 @@ export default {
       'saveProduct',
       'getProductTypes'
     ]),
-
-
+    deleteAble(data){
+      return data.variations.map(x => { return x.deleteable }).filter(x => { return x == false })
+    },
     submit() {
       this.$vs.loading({
         container: '#button-save-product',
         scale: 0.45
       })
-
       this.$validator.validateAll().then(result => {
         if(result) {
           if (this.custom) {
@@ -206,7 +206,6 @@ export default {
             this.$vs.loading.close('#button-save-product > .con-vs-loading')
         }
       })
-
       this.$vs.loading.close('#button-save-product > .con-vs-loading')
     },
     resetForm() {
