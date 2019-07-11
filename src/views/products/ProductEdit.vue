@@ -81,7 +81,7 @@
                   </div>
                   <div :class="custom ? 'sm:w-1/8' : 'sm:w-1/8 md:w-1/8'" class="vx-col mb-2">
                     <div class="remove">
-                        <font-awesome-icon icon="trash" @click="removeItem(index,key)"></font-awesome-icon>
+                        <font-awesome-icon v-if="variant.deleteable" icon="trash" @click="removeItem(index,key)"></font-awesome-icon>
                     </div>
                   </div>
                 </div>

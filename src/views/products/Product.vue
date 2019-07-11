@@ -71,7 +71,7 @@
           </vs-td>
           <vs-td :data="data[indextr].id">
             <vs-button size="small" color="primary" type="filled" :href="{url: `/products/${data[indextr].slug}/edit`}">Edit</vs-button> |
-            <vs-button size="small" color="danger" type="filled">Delete</vs-button>
+            <vs-button size="small" color="danger" type="filled" :disabled="true" :href="{url: `/products/${data[indextr].slug}/edit`}">Delete</vs-button>
           </vs-td>
         </vs-tr>
       </template>
