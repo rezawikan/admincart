@@ -28,6 +28,12 @@
           Subtotal
         </vs-th>
         <vs-th>
+          Discount
+        </vs-th>
+        <vs-th>
+          Shipping
+        </vs-th>
+        <vs-th>
           Total
         </vs-th>
         <vs-th>
@@ -47,6 +53,12 @@
           </vs-td>
           <vs-td :data="data[indextr].subtotal">
             {{data[indextr].subtotal | rupiah }}
+          </vs-td>
+          <vs-td :data="data[indextr].discount">
+            {{data[indextr].discount | rupiah}}
+          </vs-td>
+          <vs-td :data="data[indextr].shipping_method.price">
+            {{data[indextr].shipping_method.price | rupiah}}
           </vs-td>
           <vs-td :data="data[indextr].total">
             {{data[indextr].total | rupiah}}
@@ -152,7 +164,6 @@ export default {
 
   watch: {
     '$route.query'(query){
-      console.log(query);
       this.$vs.loading({
         container: '#load-orders-listing',
         scale: 0.45

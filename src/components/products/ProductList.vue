@@ -27,7 +27,7 @@
           <vs-tr :data="tr" :key="i" v-for="(tr, i) in data">
 
             <vs-td :data="data[i].name">
-              {{ data[i].name }} / {{ data[i].product.name}} / {{ data[i].type.name}}
+               {{ data[i].product.name}} / {{ data[i].type.name}} / {{ data[i].name }}
             </vs-td>
 
             <vs-td :data="data[i].base_price">

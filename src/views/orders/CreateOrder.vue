@@ -80,7 +80,8 @@
       <vx-card title="Discount">
         <div class="vx-row">
           <div class="vx-col w-full mb-6">
-             <vs-input class="w-full" type="number" label="Discount" v-model="discount" />
+             <vs-input class="w-full" type="number" label="Discount" v-model="discount" name="discount" ref="discount"  v-validate="'required'" data-vv-validate-on="blur" />
+             <span class="text-danger text-sm" :show="errors.has('discount')">{{ errors.first('discount') }}</span>
           </div>
         </div>
       </vx-card>
@@ -89,7 +90,8 @@
       <vx-card title="Shipping Detail">
         <div class="vx-row">
           <div class="vx-col w-full mb-6">
-             <ShippingMethodsDropdown :selectedID="shippingMethodId" :options="shippingMethods" v-model="shippingMethodId"/>
+             <ShippingMethodsDropdown :selectedID="shippingMethodId" :options="shippingMethods" v-model="shippingMethodId" name="shippimg method" ref="shippimg method"  v-validate="'required'" data-vv-validate-on="blur"/>
+             <span class="text-danger text-sm" :show="errors.has('shippimg method')">{{ errors.first('shippimg method') }}</span>
           </div>
         </div>
       </vx-card>
@@ -265,7 +267,7 @@ export default {
         })
 
         this.$validator.validateAll().then(result => {
-          if (result) {
+          if (result && this.products.length > 0) {
               axios.post(`${process.env.API_URL}public-orders`, {
                 ...this.form,
                 shipping_method_id: this.shippingMethodId,
@@ -275,12 +277,16 @@ export default {
               }).then(() => {
                   this.$router.replace({ path: '/orders' })
               })
+          } else if (result && this.products.length < 1) {
+              this.$vs.notify({
+                title: 'Cart',
+                text: 'Your cart is empty'
+              })
+              this.$vs.loading.close('#create-order > .con-vs-loading')
           } else {
               this.$vs.loading.close('#create-order > .con-vs-loading')
           }
         })
-
-
       }
   },
 
@@ -305,7 +311,7 @@ export default {
     },
     shippingMethodId(query) {
       if (query) {
-          this.getCart({user_id:this.customer.id, shipping_method_id: query})
+          this.getCart({user_id:this.customer.id, shipping_method_id: query, discount: this.discount})
       }
     }
   },

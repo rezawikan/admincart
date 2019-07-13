@@ -16,15 +16,18 @@
     </div>
     <div class="vx-row">
       <div class="vx-col sm:w-1/2 w-full mb-6">
-        <ProvinceDropdown v-model="province_id"/>
+        <ProvinceDropdown v-model="province_id" name="province" ref="province"  v-validate="'required'" data-vv-validate-on="blur"/>
+        <span class="text-danger text-sm" :show="errors.has('province')">{{ errors.first('province') }}</span>
       </div>
       <div class="vx-col sm:w-1/2 w-full mb-6">
-        <CityDropdown v-model="city_id" :province="province_id" :resetOnOptionsChange="resetCity" />
+        <CityDropdown v-model="city_id" :province="province_id" :resetOnOptionsChange="resetCity" name="city" ref="city"  v-validate="'required'" data-vv-validate-on="blur" />
+        <span class="text-danger text-sm" :show="errors.has('city')">{{ errors.first('city') }}</span>
       </div>
     </div>
     <div class="vx-row">
       <div class="vx-col sm:w-1/2 w-full mb-6">
-        <SubdistrictDropdown v-model="form.subdistrict_id" :city="city_id" :resetOnOptionsChange="resetSubdistrict" />
+        <SubdistrictDropdown v-model="form.subdistrict_id" :city="city_id" :resetOnOptionsChange="resetSubdistrict" name="subdistrict" ref="subdistrict"  v-validate="'required'" data-vv-validate-on="blur" />
+        <span class="text-danger text-sm" :show="errors.has('subdistrict')">{{ errors.first('subdistrict') }}</span>
       </div>
     </div>
     <div class="vx-row">
@@ -91,13 +94,19 @@ export default {
         scale: 0.45
       })
 
-      let data = Object.assign({user_id:this.customer.id},this.form)
-      this.createPublicAddresses(data).then((response) => {
-        this.$emit('created', response.data.data)
-        this.$vs.loading.close('#create-address > .con-vs-loading')
+      this.$validator.validateAll().then(result => {
+        if(result) {
+            let data = Object.assign({user_id:this.customer.id},this.form)
+            this.createPublicAddresses(data).then((response) => {
+              this.$emit('created', response.data.data)
+              this.$vs.loading.close('#create-address > .con-vs-loading')
+            })
+        } else {
+            this.$vs.loading.close('#create-address > .con-vs-loading')
+        }
       })
 
-      //
+      this.$vs.loading.close('#create-address > .con-vs-loading')
     }
   }
 }

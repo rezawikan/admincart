@@ -14,7 +14,7 @@
       <vs-tr :key="indextr" v-for="(tr, indextr) in data">
 
         <vs-td :data="tr.name">
-          {{ tr.product.name }} / {{ tr.name }}
+        {{ tr.product.name }} / {{ tr.type.name }} / {{ tr.name }}
         </vs-td>
 
         <vs-td :data="tr.product.in_stock">

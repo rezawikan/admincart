@@ -122,10 +122,6 @@ export default {
           scale: 0.45
         })
 
-        if (this) {
-
-        }
-
         this.getProducts({ ...this.$route.params, ...query }).then(() => {
           this.$vs.loading.close('#load-products-listing > .con-vs-loading')
         })

@@ -1,7 +1,7 @@
 <template>
 <tr>
   <td>
-    {{ product.product.name }} - {{ product.name }}
+    {{ product.name }} - {{ product.product.name }} - {{ type.name }}
   </td>
   <td>
     {{ product.product.in_stock ? 'In Stock' : 'Out of Stock'  }}
