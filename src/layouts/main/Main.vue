@@ -11,7 +11,7 @@
 <template>
     <div class="layout--main" :class="[navbarClasses, footerClasses, {'app-page': isAppPage}]">
 
-        <vx-sidebar :sidebarItems="sidebarItems" :logo="require('@/assets/images/logo/logo.png')" title="Vuesax" parent=".layout--main" />
+        <vx-sidebar :sidebarItems="sidebarItems" :logo="require('@/assets/images/logo/logo.png')" title="Apps" parent=".layout--main" />
 
         <div id="content-area" :class="[contentAreaClass, {'show-overlay': bodyOverlay}]">
 
@@ -29,7 +29,7 @@
                                 <h2 class="mb-1">{{ routeTitle }}</h2>
                             </div>
                             <vx-breadcrumb class="ml-4 md:block hidden" v-if="$route.meta.breadcrumb" />
-                            <vs-dropdown class="ml-auto md:block hidden cursor-pointer" vs-trigger-click>
+                            <!-- <vs-dropdown class="ml-auto md:block hidden cursor-pointer" vs-trigger-click>
                                 <vs-button radius icon="icon-settings" icon-pack="feather"></vs-button>
 
                                 <vs-dropdown-menu class="w-32">
@@ -37,7 +37,7 @@
                                     <vs-dropdown-item><router-link to="/apps/todo" class="flex items-center"><feather-icon icon="CheckSquareIcon" class="inline-block mr-2" svgClasses="w-4 h-4" /><span>Tasks</span></router-link></vs-dropdown-item>
                                     <vs-dropdown-item><router-link to="/apps/email" class="flex items-center"><feather-icon icon="MailIcon" class="inline-block mr-2" svgClasses="w-4 h-4" /><span>Inbox</span></router-link></vs-dropdown-item>
                                 </vs-dropdown-menu>
-                            </vs-dropdown>
+                            </vs-dropdown> -->
                         </div>
                         </transition>
                         <div class="content-area__content">

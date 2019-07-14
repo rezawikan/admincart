@@ -6,4 +6,8 @@ export default {
   SET_META(state, meta) {
     state.meta = meta
   },
+
+  SET_DETAIL(state, detail) {
+    state.detail = detail
+  },
 }

@@ -52,10 +52,35 @@ export default [
     icon: "LayersIcon",
   },
   {
-    url: "/orders",
+    url: null,
     name: "Orders",
     slug: "orders",
     icon: "BoxIcon",
+    submenu: [{
+        url: "/orders",
+        name: "All",
+      },
+      {
+        url: "/orders?status=pending",
+        name: "Pending",
+      },
+      {
+        url: "/orders?status=processing",
+        name: "Processing",
+      },
+      {
+        url: "/orders?status=completed",
+        name: "Completed",
+      },
+      {
+        url: "/orders?status=expired",
+        name: "Expired",
+      },
+      {
+        url: "/orders?status=payment_failed",
+        name: "Payment Failed",
+      },
+    ]
   },
   {
     url: "/customers",

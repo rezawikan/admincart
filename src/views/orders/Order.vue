@@ -42,6 +42,9 @@
         <vs-th>
           Order Date
         </vs-th>
+        <vs-th>
+          Details
+        </vs-th>
       </template>
       <template slot-scope="{data}">
         <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data" >
@@ -57,8 +60,8 @@
           <vs-td :data="data[indextr].discount">
             {{data[indextr].discount | rupiah}}
           </vs-td>
-          <vs-td :data="data[indextr].shipping_method.price">
-            {{data[indextr].shipping_method.price | rupiah}}
+          <vs-td :data="data[indextr].id">
+            {{data[indextr].shipping_price | rupiah}}
           </vs-td>
           <vs-td :data="data[indextr].total">
             {{data[indextr].total | rupiah}}
@@ -69,67 +72,9 @@
           <vs-td :data="data[indextr].created_at">
             {{data[indextr].created_at}}
           </vs-td>
-          <template class="expand-user" slot="expand">
-            <div class="con-expand-users w-full">
-              <vs-list>
-                <vs-list-header icon="verified_user" title="Accepted" color="success"></vs-list-header>
-                <vs-list-item
-                :key="product.id"
-                v-for="product in tr.products"
-                :subtitle="product.product.name+ ' / ' + product.name + ' / ' + product.type.name"
-                >
-                  <vs-chip color="primary">
-                    {{product.quantity}}
-                  </vs-chip>
-                </vs-list-item>
-              </vs-list>
-
-              <vs-list v-if="tr.returns.length > 0">
-                <vs-list-header icon="verified_user" title="Returned" color="danger"></vs-list-header>
-                <vs-list-item
-                :key="returnin.id"
-                v-for="returnin in tr.returns"
-                :subtitle="returnin.product_name+ ' / ' + returnin.variation_name + ' / ' + returnin.type_name"
-                >
-                  <vs-chip color="warning">
-                    {{returnin.quantity}}
-                  </vs-chip>
-                </vs-list-item>
-              </vs-list>
-
-              <vs-list>
-                <vs-list-header icon="map" title="Address" color="success"></vs-list-header>
-                <vs-list-item
-                :title="tr.address.name"
-                :subtitle="tr.address.address_1 + ', ' + tr.address.subdistrict.subdistrict + ', ' + tr.address.subdistrict.city + ', ' + tr.address.subdistrict.province"
-                >
-                </vs-list-item>
-              </vs-list>
-
-              <vs-list>
-                <vs-list-header icon="map" title="Payment" color="success"></vs-list-header>
-                <vs-list-item :title="tr.payment_method" >
-                </vs-list-item>
-              </vs-list>
-
-              <vs-list>
-                <vs-list-header icon-pack="feather" icon="icon-box" title="Shipping" color="success"></vs-list-header>
-                <vs-list-item
-                :title="tr.shipping_method.courier + ' - '+ tr.shipping_method.code"
-                :subtitle="tr.shipping_method.estimation">
-                </vs-list-item>
-              </vs-list>
-
-              <!-- <vs-list>
-                <vs-list-header icon-pack="feather" icon="icon-truck" title="Delivery" color="success"></vs-list-header>
-                <vs-list-item
-                :title="tr.shipping_method.courier"
-                :subtitle="tr.address.address_1 + ', ' + tr.address.subdistrict.subdistrict + ', ' + tr.address.subdistrict.city + ', ' + tr.address.subdistrict.province"
-                >
-                </vs-list-item>
-              </vs-list> -->
-            </div>
-          </template>
+          <vs-td :data="data[indextr].id">
+          <vs-button :href="'/orders/'+data[indextr].id+'/show'" color="primary" type="filled">Detail Order</vs-button>
+          </vs-td>
         </vs-tr>
       </template>
     </vs-table>
@@ -141,12 +86,19 @@
 import { mapActions, mapGetters } from 'vuex'
 import Pagination from '@/components/pagination/Pagination.vue'
 export default {
-  metaInfo: {
-    title: 'Ummu Zayn',
-    titleTemplate: '%s - Orders',
-    htmlAttrs: {
-      lang: 'en',
-      amp: true
+  metaInfo() {
+    let status = null
+    if (this.status != null) {
+        status = this.status.charAt(0).toUpperCase() + this.status.slice(1)
+    }
+
+    return {
+      title: 'Ummu Zayn',
+      titleTemplate: `%s - Orders ${status != null ? status : 'All'}`,
+      htmlAttrs: {
+        lang: 'en',
+        amp: true
+      }
     }
   },
 
@@ -179,12 +131,15 @@ export default {
     ...mapGetters({
       orders: 'orders/orders',
       meta: 'orders/meta'
-    })
+    }),
+    status() {
+      return this.$route.query.status || null
+    },
   },
 
   methods: {
     ...mapActions({
-      getOrder : 'orders/getLiveOrder'
+      getOrder : 'orders/getOrder'
     }),
     keyupSearch($event) {
       this.reset = true

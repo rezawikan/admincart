@@ -1,4 +1,5 @@
 export default {
   orders: [],
-  meta: []
+  meta: [],
+  detail: []
 }

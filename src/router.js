@@ -157,6 +157,29 @@ const router = new Router({
           },
         },
         {
+          path: '/orders/:orderId/show',
+          name: 'order-detail',
+          component: () => import('./views/orders/OrderDetail.vue'),
+          meta: {
+            breadcrumb: [{
+                title: 'Home',
+                url: '/'
+              },
+              {
+                title: 'Orders',
+                url: '/orders'
+              },
+              {
+                title: 'Order Detail',
+                active: true
+              }
+            ],
+            pageTitle: 'Order Detail',
+            guest: false,
+            needsAuth: true
+          },
+        },
+        {
           path: '/customers',
           name: 'customers',
           component: () => import('./views/customers/Customer.vue'),
