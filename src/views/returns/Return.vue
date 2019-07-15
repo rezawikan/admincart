@@ -36,6 +36,9 @@
         <vs-th>
           Info
         </vs-th>
+        <vs-th>
+          Action
+        </vs-th>
       </template>
 
       <template slot-scope="{data}">
@@ -59,6 +62,10 @@
           <vs-td :data="data[indextr].id">
             {{data[indextr].info}}
           </vs-td>
+
+          <vs-td :data="data[indextr].id">
+            <ReturnUpdate :id="data[indextr].id" class="p-3 mb-4 mr-4 cursor-pointer flex items-center justify-between text-lg font-medium text-base text-primary"/>
+          </vs-td>
         </vs-tr>
       </template>
     </vs-table>
@@ -70,6 +77,7 @@
 import { mapActions, mapGetters } from 'vuex'
 import Pagination from '@/components/pagination/Pagination.vue'
 import ReturnCreate from '@/components/returns/ReturnCreate.vue'
+import ReturnUpdate from '@/components/returns/ReturnUpdate.vue'
 export default {
   metaInfo: {
     title: 'Ummu Zayn',
@@ -89,6 +97,7 @@ export default {
 
   components: {
     ReturnCreate,
+    ReturnUpdate,
     Pagination
   },
 

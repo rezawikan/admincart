@@ -256,9 +256,6 @@ export default {
         getPaymentMethods: 'payments/getPaymentMethods',
         getShippingMethodsForAddress: 'shippings/getShippingMethodsForAddress'
       }),
-      ...mapMutations('shippings', [
-        'SET_SHIPPING_METHODS'
-      ]),
 
       order() {
         this.$vs.loading({

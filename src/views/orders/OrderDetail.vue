@@ -143,15 +143,18 @@
           </vs-table>
         </vx-card>
       </div>
-      <div class="vx-col w-full mb-base" v-if="detail.products">
-        <vx-card title="Order Detail">
-          <vs-table :data="detail.products">
+      <div class="vx-col w-full mb-base" v-if="detail.returns">
+        <vx-card title="Order Return Detail">
+          <vs-table :data="detail.returns">
             <template slot="thead">
               <vs-th>
                 ID
               </vs-th>
               <vs-th>
                 Product Name
+              </vs-th>
+              <vs-th>
+                Info
               </vs-th>
               <vs-th>
                 Quantity
@@ -169,7 +172,10 @@
                   {{ data[indextr].id }}
                 </vs-td>
                 <vs-td :data="data[indextr].id">
-                  {{ data[indextr].product.name }} / {{ data[indextr].type.name }} / {{ data[indextr].name }}
+                  {{ data[indextr].product_name }} / {{ data[indextr].type_name }} / {{ data[indextr].variation_name }}
+                </vs-td>
+                <vs-td :data="data[indextr].id">
+                  {{ data[indextr].info }}
                 </vs-td>
                 <vs-td :data="data[indextr].id">
                   {{ data[indextr].quantity }}
@@ -185,40 +191,10 @@
                 <vs-td colspan="3" >
                 </vs-td>
                 <vs-td>
-                  <b>SubTotal</b>
-                </vs-td>
-                <vs-td>
-                  {{ detail.subtotal | rupiah }}
-                </vs-td>
-              </vs-tr>
-              <vs-tr >
-                <vs-td colspan="3" >
-                </vs-td>
-                <vs-td>
-                  <b>Discount</b>
-                </vs-td>
-                <vs-td>
-                  {{ detail.discount | rupiah }}
-                </vs-td>
-              </vs-tr>
-              <vs-tr >
-                <vs-td colspan="3" >
-                </vs-td>
-                <vs-td>
-                  <b>Shipping</b>
-                </vs-td>
-                <vs-td>
-                  {{ detail.shipping_price | rupiah }}
-                </vs-td>
-              </vs-tr>
-              <vs-tr >
-                <vs-td colspan="3" >
-                </vs-td>
-                <vs-td>
                   <b>Total</b>
                 </vs-td>
                 <vs-td>
-                {{ detail.total | rupiah }}
+                {{ totalReturns | rupiah }}
                 </vs-td>
               </vs-tr>
             </template>
@@ -249,13 +225,16 @@ export default {
     shipping() {
       return this.detail.shipping
     },
-    totalProducts() {
-        let total = this.detail.products.map((product) => {
+    totalReturns() {
+        if (this.detail.returns.length == 0) {
+            return 0
+        }
+        let total = this.detail.returns.map((product) => {
           return product.original_price
         })
 
         return total.reduce((a, b) => a + b)
-    }
+    },
   },
 
   methods: {

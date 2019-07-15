@@ -67,22 +67,34 @@ export default {
           scale: 0.45
         })
 
-        this.createUser({
-              ...this.form
-        }).then((response) => {
+        this.$validator.validateAll().then(result => {
+          if(result) {
 
-            if (isEmpty(response.data.errors)) {
-                this.popupActivo = false
-                this.form.email = ''
-                this.form.name = ''
-                this.form.password = ''
-                this.form.password_confirmation = ''
-            } else {
-                this.messages = response.data.errors
-                this.notify = true
-            }
+            this.createUser({
+                  ...this.form
+            }).then((response) => {
 
-            this.$vs.loading.close('#button-create-user > .con-vs-loading')
+                if (isEmpty(response.data.errors)) {
+                    this.$nextTick(() => {
+                         this.form.clear()
+                         this.form.reset()
+                         this.$validator.reset()
+                         this.$validator.errors.clear()
+                         this.$validator.resume()
+                       })
+                    this.popupActivo = false
+                } else {
+                    this.messages = response.data.errors
+                    this.notify = true
+                }
+
+                this.$vs.loading.close('#button-create-user > .con-vs-loading')
+
+            })
+
+          } else {
+              this.$vs.loading.close('#button-create-user > .con-vs-loading')
+          }
         })
     }
   }

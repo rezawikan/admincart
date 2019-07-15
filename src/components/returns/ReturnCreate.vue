@@ -64,12 +64,12 @@ export default {
   computed: {
     current_quantity() {
       return this.order.products.map((x) => {
-        return { quantity:x.quantity, id: x.id }
+        return { quantity:x.quantity, id: x.id, original_price: x.original_price }
       })
     },
     change_quantity() {
       return this.products.map((x) => {
-        return { quantity:x.quantity, id: x.id }
+        return { quantity:x.quantity, id: x.id, original_price: x.original_price }
       })
     },
     return_values() {
@@ -80,7 +80,8 @@ export default {
             let val = this.current_quantity[i].quantity - this.change_quantity[i].quantity
             values.push({
               id: this.current_quantity[i].id,
-              quantity: val
+              quantity: val,
+              original_price: this.current_quantity[i].original_price
             })
         }
       }
@@ -112,17 +113,8 @@ export default {
         this.$vs.loading.close('#button-save-return > .con-vs-loading')
         this.popupActivo = false
       })
-
-
-    }
-  },
-
-  watch: {
-    'form.id'(){
-
     }
   }
-
 }
 </script>
 <style lang="scss" scoped>
