@@ -119,9 +119,10 @@ export default {
       // let data = {
       //   origin: id,
       //   payload: {
-      //     order_id:
-      //     product_variation_id:
-      //     quantity:
+      //     order_id: current_return.order_id,
+      //     product_variation_id: current_return.product_variation_id,
+      //     quantity: form.quantity, 
+      //     original_price: current_return.original_price
       //   }
       // }
       // this.updateReturn(data)
