@@ -29,7 +29,8 @@ export default {
           return error.response
       })
     },
-    updateReturn({ dispatch },payload) {
+    updateReturn({ dispatch }, payload) {
+      console.log(origin, payload);
       return axios.put(`${process.env.API_URL}returns/${payload.origin}`, payload)
       .then((response) => {
         dispatch('getReturn')

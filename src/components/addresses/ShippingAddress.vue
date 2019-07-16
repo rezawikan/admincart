@@ -41,25 +41,33 @@
   import ShippingAddressSelector from './ShippingAddressSelector'
   import ShippingAddressCreator from './ShippingAddressCreator'
   export default {
-    data() {
-      return {
-        selecting: false,
-        // localAddresses: this.addresses,
-        selectedAddress: null,
-        currentEdit: [],
-        creating: false
-      }
-    },
     components: {
       ShippingAddressSelector,
       ShippingAddressCreator,
     },
+
     props: {
       addresses : {
         required: true,
         type: Array
       }
     },
+
+    data() {
+      return {
+        selecting: false,
+        selectedAddress: null,
+        currentEdit: [],
+        creating: false
+      }
+    },
+
+    watch: {
+      selectedAddress(address) {
+        this.$emit('input', address.id)
+      }
+    },
+
     computed: {
       defaultAddresses() {
         return this.localAddresses.find( a =>  a.default === true)
@@ -73,17 +81,12 @@
         }
       }
     },
-    watch: {
-      selectedAddress(address) {
-        this.$emit('input', address.id)
-      }
-    },
+
     methods: {
       editAddresses(address){
         this.selecting = false
         this.editing = true
         this.currentEdit = address
-
       },
       addressSelected(address){
         this.switchAddress(address)

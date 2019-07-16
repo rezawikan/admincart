@@ -1,24 +1,23 @@
 <template lang="html">
-  <div class="centerx">
-    <vs-button  @click="popupActivo=true" color="primary" type="filled">Overview</vs-button>
-    <vs-popup class="holamundo"  title="Return Product" :active.sync="popupActivo">
-      <div class="vx-col w-full mb-base" v-if="current_return.length != 0">
+  <div>
+    <div class="vx-col w-full mb-base" v-if="current_return.length != 0">
+      <vx-card>
         <div class="vx-row mb-6">
-          <div class="vx-col w-full">
-              <vs-input label-placeholder="Order ID" :value="current_return.order_id" disabled="true"/>
+          <div class="vx-col w-full sm:w-1/2">
+            <label class="vs-input--label">Order ID</label>
+            <vs-input class="w-full" :value="current_return.order_id" disabled="true"/>
+          </div>
+          <div class="vx-col w-full sm:w-1/2">
+            <label class="vs-input--label">Product Name</label>
+            <vs-input class="w-full" :value="`${current_return.product_name} / ${current_return.product_type} / ${current_return.variation_name}`" disabled="true"/>
           </div>
         </div>
         <div class="vx-row mb-6">
-          <div class="vx-col w-full">
-              <vs-input label-placeholder="Product Name" :value="`${current_return.product_name} / ${current_return.product_type} / ${current_return.variation_name}`" disabled="true"/>
-          </div>
-        </div>
-        <div class="vx-row mb-6">
-          <div class="vx-col w-full sm:w-1/3">
+          <div class="vx-col w-full sm:w-1/2">
               <label for="" class="vs-select--label">Quantity</label>
               <vs-input-number v-model="form.quantity" min="1" :max="maxQuantity" />
           </div>
-          <div class="vx-col w-full sm:w-2/3">
+          <div class="vx-col w-full sm:w-1/2">
             <vs-select v-model="form.status" class="w-full select-large" label="Status">
                 <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in options" class="w-full" />
             </vs-select>
@@ -26,19 +25,20 @@
         </div>
         <div class="vx-row mb-6">
           <div class="vx-col w-full">
-              <vs-input label-placeholder="Info" v-model="form.info"/>
+            <label class="vs-input--label">Info</label>
+            <vs-input class="w-full" v-model="form.info"/>
           </div>
         </div>
         <div class="vx-row mb-6">
           <div class="vx-col w-full sm:w-1/2">
-              <vs-button color="primary" type="filled">Update Return</vs-button>
+              <vs-button name="updateReturn" color="primary" type="filled" @click="update">Update Return</vs-button>
           </div>
           <div class="vx-col w-full sm:w-1/2">
-              <vs-button color="primary" type="filled" @click="cancelReturn(current_return.id)">Cancel Return</vs-button>
+              <!-- <vs-button color="primary" type="filled" @click="cancelReturn(current_return.id)">Cancel Return</vs-button> -->
           </div>
         </div>
-      </div>
-    </vs-popup>
+      </vx-card>
+    </div>
   </div>
 </template>
 
@@ -48,10 +48,13 @@ import axios from 'axios'
 import vSelect from 'vue-select'
 
 export default {
-  props: {
-      id: {
-        required: true
-      }
+  metaInfo: {
+    title: 'Ummu Zayn',
+    titleTemplate: '%s - Returns',
+    htmlAttrs: {
+      lang: 'en',
+      amp: true
+    }
   },
 
   components: {
@@ -90,12 +93,8 @@ export default {
             return 0
         }
 
-      return parseInt(quantity)
+      return parseInt(quantity) + this.current_return.quantity
     }
-  },
-
-  watch:{
-
   },
 
   methods: {
@@ -114,42 +113,27 @@ export default {
           this.messages = error.response
       })
     },
-    cancelReturn(id) {
-      console.log(id);
-      // let data = {
-      //   origin: id,
-      //   payload: {
-      //     order_id: current_return.order_id,
-      //     product_variation_id: current_return.product_variation_id,
-      //     quantity: form.quantity, 
-      //     original_price: current_return.original_price
-      //   }
-      // }
-      // this.updateReturn(data)
+    update() {
+      this.updateReturn({
+        origin: this.current_return.id,
+        order_id: this.current_return.order_id,
+        product_variation_id: this.current_return.product_variation_id,
+        quantity: this.form.quantity,
+        status: this.form.status,
+        info: this.form.info,
+        original_price: this.current_return.original_price
+      }).then((response) => {
+        console.log(response);
+      })
     }
   },
 
   created() {
-    this.showReturn(this.id)
+    this.showReturn(this.$route.params.id)
   }
 }
 </script>
-<style lang="scss" scoped>
-.vs-con-input-label {
-  width: 100%;
-}
-table tr td {
-  text-align: center;
-  &:nth-child(1) {
-    text-align: left;
-  }
-}
 
-table tr th {
-  text-align: center;
-  &:nth-child(1) {
-    text-align: left;
-  }
-}
+<style lang="scss" scoped>
 
 </style>

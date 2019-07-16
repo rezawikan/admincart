@@ -218,6 +218,25 @@ const router = new Router({
           },
         },
         {
+          path: '/returns/:id/edit',
+          name: 'returns-edit',
+          component: () => import('./views/returns/ReturnEdit.vue'),
+          meta: {
+            breadcrumb: [{
+                title: 'Home',
+                url: '/'
+              },
+              {
+                title: 'Returns Edit',
+                active: true
+              }
+            ],
+            pageTitle: 'Returns Edit',
+            guest: false,
+            needsAuth: true
+          },
+        },
+        {
           path: '/shipment',
           name: 'shipment',
           component: () => import('./views/shipment/Shipment.vue'),

@@ -64,7 +64,7 @@
           </vs-td>
 
           <vs-td :data="data[indextr].id">
-            <ReturnUpdate :id="data[indextr].id" class="p-3 mb-4 mr-4 cursor-pointer flex items-center justify-between text-lg font-medium text-base text-primary"/>
+              <vs-button color="primary" type="filled" :href="{url: `/returns/${data[indextr].id}/edit`}">Overview</vs-button>
           </vs-td>
         </vs-tr>
       </template>
@@ -77,7 +77,6 @@
 import { mapActions, mapGetters } from 'vuex'
 import Pagination from '@/components/pagination/Pagination.vue'
 import ReturnCreate from '@/components/returns/ReturnCreate.vue'
-import ReturnUpdate from '@/components/returns/ReturnUpdate.vue'
 export default {
   metaInfo: {
     title: 'Ummu Zayn',
@@ -97,7 +96,6 @@ export default {
 
   components: {
     ReturnCreate,
-    ReturnUpdate,
     Pagination
   },
 

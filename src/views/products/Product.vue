@@ -16,11 +16,7 @@
       </div>
     </div>
     <vs-table :data="products">
-      <template slot="header">
-
-      </template>
       <template slot="thead">
-
         <vs-th>
           Image
         </vs-th>
