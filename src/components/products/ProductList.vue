@@ -31,11 +31,11 @@
             </vs-td>
 
             <vs-td :data="data[i].base_price">
-              {{ data[i].base_price }}
+              {{ data[i].base_price  | rupiah }}
             </vs-td>
 
             <vs-td :data="data[i].price">
-              {{ data[i].price }}
+              {{ data[i].price | rupiah }}
             </vs-td>
 
             <vs-td :data="data[i].weight">

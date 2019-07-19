@@ -218,7 +218,7 @@ export default {
         value[keys[i]]
         variations.push(keys[i] = {
           name: keys[i],
-          variations: value[keys[i]]
+          variations: _.orderBy(value[keys[i]], 'name', 'asc')
         })
       }
       return variations
