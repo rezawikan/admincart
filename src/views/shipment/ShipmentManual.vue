@@ -60,7 +60,7 @@ import ShipmentList from '@/components/shipment/ShipmentList.vue'
 export default {
   metaInfo: {
     title: 'Ummu Zayn',
-    titleTemplate: '%s - Returns',
+    titleTemplate: '%s - Manual Shipment Generate',
     htmlAttrs: {
       lang: 'en',
       amp: true

@@ -95,10 +95,19 @@ export default [
     icon: "ArchiveIcon",
   },
   {
-    url: "/shipment",
+    url: "null",
     name: "Shipment",
     slug: "shipment",
     icon: "TruckIcon",
+    submenu: [{
+        url: "/shipment/manual",
+        name: "Manual Generate",
+      },
+      {
+        url: "/shipment/auto",
+        name: "Auto Generate",
+      },
+    ]
   },
   {
     url: null,
@@ -116,6 +125,17 @@ export default [
       {
         url: "/location/subdistricts",
         name: "Subdistricts",
+      },
+    ]
+  },
+  {
+    url: null,
+    name: "Report",
+    slug: "report",
+    icon: "RefreshCcwIcon",
+    submenu: [{
+        url: "/report/cashflow",
+        name: "Cashflow",
       },
     ]
   },
