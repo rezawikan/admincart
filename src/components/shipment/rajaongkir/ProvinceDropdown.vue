@@ -7,44 +7,59 @@ import vSelect from 'vue-select'
 import { mapActions, mapGetters } from 'vuex'
 import axios from 'axios'
 export default {
-  data() {
-      return {
-        selected: []
-      }
-  },
+	props: {
+		type: {
+			required: true,
+			type: String
+		}
+	},
+  
+	data() {
+		return {
+			selected: []
+		}
+	},
 
-  components: {
-      vSelect
-  },
+	components: {
+		vSelect
+	},
 
-  filters: {
-    serialize: function (value) {
-      return value.map(filter => {
-        return ({label: filter.province, value: filter.province_id})
-      })
-    }
-  },
+	watch: {
+		'type'() {
+			this.getProvinces({
+				type: this.type
+			})
+		}
+	},
 
-  computed: {
-    ...mapGetters({
-      provinces: 'ongkir/provinces'
-    })
-  },
+	filters: {
+		serialize: function(value) {
+			return value.map(filter => {
+				return ({
+					label: filter.province,
+					value: filter.province_id
+				})
+			})
+		}
+	},
 
-  methods: {
-    ...mapActions({
-      getProvinces: 'ongkir/getProvinces'
-    }),
-    changed(value){
-      if (value) {
-        this.$emit('input', value.value)
-      } else {
-        this.$emit('input', null)
-      }
-    }
-  },
-  created() {
-    this.getProvinces()
-  }
+	computed: {
+		...mapGetters({
+			provinces: 'ongkir/provinces'
+		})
+	},
+
+	methods: {
+		...mapActions({
+			getProvinces: 'ongkir/getProvinces'
+		}),
+		changed(value) {
+			if (value) {
+				this.$emit('input', value.value)
+			} else {
+				this.$emit('input', null)
+			}
+		}
+	}
 }
 </script>

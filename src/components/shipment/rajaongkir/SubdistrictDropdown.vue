@@ -10,6 +10,10 @@ export default {
     city: {
       required: true,
     },
+    type: {
+			required: true,
+			type: String
+		},
     resetOnOptionsChange: {
       type: Boolean, default: false
     }
@@ -21,7 +25,10 @@ export default {
 
   watch: {
     'city'(){
-      this.getSubdistricts({city: this.city})
+      this.getSubdistricts({
+        city: this.city,
+        type: this.type
+      })
     }
   },
 
