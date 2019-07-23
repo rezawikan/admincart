@@ -7,7 +7,11 @@
           title-color="primary">
           <div class="vx-col w-full mb-6">
             <p>Type</p>
-            <v-select :options="['national','international']" v-model="type"></v-select>
+            <v-select :options="['National','International']" v-model="type"></v-select>
+          </div>
+          <div class="vx-col w-full mb-6">
+            <p>Couriers</p>
+            <v-select multiple :options="options" v-model="courier"></v-select>
           </div>
           <div class="vx-col w-full mb-6">
             <p>Province</p>
@@ -124,6 +128,76 @@ export default {
 
 	data() {
 		return {
+      courier: [],
+			options: [{
+					label: 'Jalur Nugraha Ekakurir (JNE)',
+					value: 'jne'
+				},
+				{
+					label: 'POS Indonesia (POS)',
+					value: 'pos'
+				},
+				{
+					label: 'Citra Van Titipan Kilat (TIKI)',
+					value: 'tiki'
+				},
+				{
+					label: 'Priority Cargo and Package (PCP)',
+					value: 'pcp'
+				},
+				{
+					label: 'RPX Holding (RPX)',
+					value: 'rpx'
+				},
+				{
+					label: 'Eka Sari Lorena (ESL)',
+					value: 'esl'
+				},
+				{
+					label: 'Pandu Logistics (PANDU)',
+					value: 'pandu'
+				},
+				{
+					label: 'Wahana Prestasi Logistik (WAHANA)',
+					value: 'wahana'
+				},
+				{
+					label: 'SiCepat Express (SICEPAT)',
+					value: 'sicepat'
+				},
+				{
+					label: 'J&T Express (J&T)',
+					value: 'jnt'
+				},
+				{
+					label: 'Pahala Kencana Express (PAHALA)',
+					value: 'pahala'
+				},
+				{
+					label: 'SAP Express (SAP)',
+					value: 'sap'
+				},
+				{
+					label: 'JET Express (JET)',
+					value: 'jet'
+				},
+				{
+					label: 'Lion Parcel (LION)',
+					value: 'lion'
+				},
+				{
+					label: 'Ninja Xpress (NINJA)',
+					value: 'ninja'
+				},
+				{
+					label: 'IDL Cargo (IDL)',
+					value: 'idl'
+				},
+				{
+					label: 'Royal Express Indonesia (REX)',
+					value: 'rex'
+				}
+			],
 			type: '',
 			province_id: '',
 			city_id: '',
@@ -139,9 +213,9 @@ export default {
 	watch: {
 		'destination.subdistrict_id'() {
 			this.getCost({
-        type: this.type,
+				type: this.type,
 				destination: this.destination.subdistrict_id,
-				courier: 'jne:jnt:pos:tiki'
+				courier: this.couriers
 			})
 		}
 	},
@@ -174,7 +248,10 @@ export default {
 		...mapGetters({
 			cost: 'ongkir/cost',
 			filteredCost: 'ongkir/filteredCost'
-		})
+		}),
+    couriers() {
+      return this.courier.map(x => { return x.value }).join(':')
+    }
 	}
 }
 </script>
