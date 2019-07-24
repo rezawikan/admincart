@@ -20,6 +20,7 @@
                   <th>Product Name</th>
                   <th>Current</th>
                   <th>Returned</th>
+                  <!-- <th>Discount</th> -->
                 </tr>
                 <tr :key="product.id" v-for="(product, index) in order.products">
                   <td>{{ product.name }}</td>
@@ -29,8 +30,16 @@
                   <td>
                     {{ product.quantity - products[index].quantity}}
                   </td>
+                  <!-- <td>
+                    <vs-input class="inputx" placeholder="Discount" v-model="product[index].discount" />
+                  </td> -->
                 </tr>
               </table>
+            </div>
+            <div class="vx-col w-full">
+              <div class="centerx labelx">
+                <vs-input type="number" label="Discount" placeholder="0" v-model="discount"/>
+              </div>
               <vs-button type="relief" vslor="primary" id="button-save-return" class="vs-con-loading__container mt-3" @click="submit" v-if="order.products">Submit Return</vs-button>
             </div>
           </div>
@@ -57,7 +66,8 @@ export default {
         id: ''
       },
       order: [],
-      products: []
+      products: [],
+      discount: null
     }
   },
 
@@ -81,7 +91,8 @@ export default {
             values.push({
               id: this.current_quantity[i].id,
               quantity: val,
-              original_price: this.current_quantity[i].original_price
+              original_price: this.current_quantity[i].original_price,
+              discount: this.current_quantity[i].discount
             })
         }
       }
@@ -108,7 +119,8 @@ export default {
       this.createReturn({
         order_id: this.order.id,
         updated_products: this.products,
-        return_values: this.return_values
+        return_values: this.return_values,
+        discount: this.discount
       }).then(() => {
         this.$vs.loading.close('#button-save-return > .con-vs-loading')
         this.popupActivo = false

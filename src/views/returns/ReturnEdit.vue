@@ -25,6 +25,12 @@
         </div>
         <div class="vx-row mb-6">
           <div class="vx-col w-full">
+            <label class="vs-input--label">Discount</label>
+            <vs-input class="w-full" v-model="form.discount"/>
+          </div>
+        </div>
+        <div class="vx-row mb-6">
+          <div class="vx-col w-full">
             <label class="vs-input--label">Info</label>
             <vs-input class="w-full" v-model="form.info"/>
           </div>
@@ -70,7 +76,8 @@ export default {
       form: {
         quantity: 0,
         status: '',
-        info: ''
+        info: '',
+        discount: null
       },
       order: [],
       options: [
@@ -104,11 +111,13 @@ export default {
     showReturn(id) {
       return axios.get(`${process.env.API_URL}returns/${id}`)
       .then((response) => {
+        console.log(response.data.data);
           this.current_return = response.data.data
           this.form.quantity = this.current_return.quantity
           this.form.status = this.current_return.status
           this.form.info = this.current_return.info
           this.order = response.data.data.order
+          this.form.discount = response.data.data.discount
       }, (error) => {
           this.messages = error.response
       })
@@ -120,6 +129,7 @@ export default {
         product_variation_id: this.current_return.product_variation_id,
         quantity: this.form.quantity,
         status: this.form.status,
+        discount: this.form.discount,
         info: this.form.info,
         original_price: this.current_return.original_price
       }).then((response) => {
