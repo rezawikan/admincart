@@ -37,7 +37,7 @@
         </div>
         <div class="vx-row mb-6">
           <div class="vx-col w-full sm:w-1/2">
-              <vs-button name="updateReturn" color="primary" type="filled" @click="update">Update Return</vs-button>
+              <vs-button id="update-returns" class="vs-con-loading__container" name="updateReturn" color="primary" type="filled" @click="update">Update Return</vs-button>
           </div>
           <div class="vx-col w-full sm:w-1/2">
               <!-- <vs-button color="primary" type="filled" @click="cancelReturn(current_return.id)">Cancel Return</vs-button> -->
@@ -111,7 +111,6 @@ export default {
     showReturn(id) {
       return axios.get(`${process.env.API_URL}returns/${id}`)
       .then((response) => {
-        console.log(response.data.data);
           this.current_return = response.data.data
           this.form.quantity = this.current_return.quantity
           this.form.status = this.current_return.status
@@ -123,6 +122,11 @@ export default {
       })
     },
     update() {
+      this.$vs.loading({
+        container: '#update-returns',
+        scale: 0.45
+      })
+
       this.updateReturn({
         origin: this.current_return.id,
         order_id: this.current_return.order_id,
@@ -132,8 +136,9 @@ export default {
         discount: this.form.discount,
         info: this.form.info,
         original_price: this.current_return.original_price
-      }).then((response) => {
-        console.log(response);
+      }).then(() => {
+          this.$vs.loading.close('#update-returns > .con-vs-loading')
+          this.$router.replace({ path: '/returns' })
       })
     }
   },
