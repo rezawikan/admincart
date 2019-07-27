@@ -10,6 +10,30 @@
     <div class="vx-col w-full sm:w-1/3 md:w-1/3 lg:w-1/3 xl:w-1/3 mb-base">
       <statistics-card-line icon="LoaderIcon" :statistic="amountProcessing" statisticTitle="Processing" :chartData="processing" color='danger' type='area'></statistics-card-line>
     </div>
+    <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 mb-base">
+      <vx-card>
+          <template slot="no-body">
+              <div class="p-8 clearfix">
+                  <div>
+                      <h1><sup class="text-lg">Rp</sup> {{ assets.assets | rupiah }}</h1>
+                  </div>
+                  <p class="mt-2 mb-8 text-xl text-success font-medium">Assets</p>
+              </div>
+          </template>
+      </vx-card>
+    </div>
+    <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 mb-base">
+      <vx-card>
+          <template slot="no-body">
+              <div class="p-8 clearfix">
+                  <div>
+                      <h1><sup class="text-lg">Rp</sup> {{ assets.op_asset | rupiah }}</h1>
+                  </div>
+                  <p class="mt-2 mb-8 text-xl text-success font-medium">Opportunity Assets</p>
+              </div>
+          </template>
+      </vx-card>
+    </div>
   </div>
   <div class="vx-row">
     <div class="vx-col w-full mb-base">
@@ -65,6 +89,7 @@ export default {
     ...mapActions({
       analyticsGraphicCount: 'analytics/analyticsGraphicCount',
       analyticsGraphicRevenue: 'analytics/analyticsGraphicRevenue',
+      analyticsPoductAssets: 'analytics/analyticsPoductAssets'
 
     })
   },
@@ -456,10 +481,17 @@ export default {
             this.thisMonth = response
         }
     })
+
+    this.analyticsPoductAssets().then((response) => {
+        this.assets = response
+    })
+
+
   },
 
 	data() {
 		return {
+      assets: 0,
       analyticsData: analyticsData,
       lastMonth :{
         status: [0,0,0,0],

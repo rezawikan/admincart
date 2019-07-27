@@ -18,4 +18,13 @@ export default {
           return error.response
       })
     },
+    analyticsPoductAssets({ commit }) {
+      return axios.get(`${process.env.API_URL}assets`)
+      .then((response) => {
+        console.log(response);
+        return response.data
+      }, (error) => {
+          return error.response
+      })
+    },
 }
