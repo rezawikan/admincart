@@ -44,64 +44,70 @@
 import { mapActions } from 'vuex'
 import { isEmpty } from 'lodash'
 export default {
-  data(){
-    return {
-      popupActivo:false,
-      messages: [],
-      notify: false,
-      form: {
-        email: '',
-        name: '',
-        password: '',
-        password_confirmation: ''
+	data() {
+		return {
+			popupActivo: false,
+			messages: [],
+			notify: false,
+			form: {
+				email: '',
+				name: '',
+				password: '',
+				password_confirmation: ''
+			}
+		}
+	},
+  watch: {
+    'popupActivo'(value) {
+      if (!value) {
+        this.$validator.reset()
       }
     }
   },
-  methods: {
-    ...mapActions('users',[
-      'createUser'
-    ]),
-    submit() {
-        this.$vs.loading({
-          container: '#button-create-user',
-          scale: 0.45
-        })
+	methods: {
+		...mapActions('users', [
+			'createUser'
+		]),
+		resetForm() {
+			var self = this; //you need this because *this* will refer to Object.keys below`
 
-        this.$validator.validateAll().then(result => {
-          if(result) {
+			//Iterate through each object field, key is name of the object field`
+			Object.keys(this.form).forEach(function(key, index) {
+				self.form[key] = '';
+			});
+		},
+		submit() {
+			this.$vs.loading({
+				container: '#button-create-user',
+				scale: 0.45
+			})
 
-            this.createUser({
-                  ...this.form
-            }).then((response) => {
+			this.$validator.validateAll().then(result => {
+				if (result) {
 
-                if (isEmpty(response.data.errors)) {
-                    this.$nextTick(() => {
-                         this.form.clear()
-                         this.form.reset()
-                         this.$validator.reset()
-                         this.$validator.errors.clear()
-                         this.$validator.resume()
-                       })
-                    this.popupActivo = false
-                } else {
-                    this.messages = response.data.errors
-                    this.notify = true
-                }
+					this.createUser({
+						...this.form
+					}).then((response) => {
 
-                this.$vs.loading.close('#button-create-user > .con-vs-loading')
+						if (isEmpty(response.data.errors)) {
+							this.$validator.reset()
+							this.resetForm()
+							this.popupActivo = false
+						} else {
+							this.messages = response.data.errors
+							this.notify = true
+						}
 
-            })
-
-          } else {
-              this.$vs.loading.close('#button-create-user > .con-vs-loading')
-          }
-        })
-    }
-  }
+						this.$vs.loading.close('#button-create-user > .con-vs-loading')
+					})
+				}
+			})
+		}
+	}
 }
 </script>
 <style lang="scss" scoped>
 .vs-con-input-label {
-  width: 100%;
+    width: 100%;
 }
 </style>

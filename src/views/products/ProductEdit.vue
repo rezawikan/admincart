@@ -110,6 +110,7 @@ import ProductType from '@/components/product-type/ProductType.vue'
 import Upload from '@/components/upload/Upload.vue'
 import { slugString } from '../../helpers/slug'
 import axios from 'axios'
+import _ from 'lodash'
 
 export default {
   metaInfo: {
