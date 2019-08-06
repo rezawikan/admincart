@@ -11,6 +11,7 @@
 
 <template>
   <div
+    v-show="canSee"
     :class="[{'vs-sidebar-group-open' : openItems}, {'vs-sidebar-group-active': open}, {'disabled-item pointer-events-none': group.isDisabled}]"
     class="vs-sidebar-group"
     @mouseover="mouseover"
@@ -62,6 +63,13 @@ export default {
         openItems: false
     }),
     computed: {
+        canSee() {
+            this.$acl.check(this.$store.state.userRole);
+            if(this.to) {
+                return this.$acl.check(this.$router.match(this.to).meta.rule)
+            }
+            return true
+        },
         sidebarItemsMin() {
             return this.$store.state.sidebarItemsMin;
         },

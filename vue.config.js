@@ -10,26 +10,26 @@ const Dotenv = require('dotenv-webpack');
 const env = process.env.NODE_ENV;
 
 module.exports = {
-	devServer: {
-		proxy: {
-			'^/v2': {
-				target: 'https://ummuzayn-api.rezawikan.com/api/',
-				ws: true,
-				changeOrigin: true,
-				pathRewrite: {
-					'^/v2': '' // rewrite path
-				}
-			},
-			'^/v1': {
-				target: 'http://cart.test:8080/api/',
-				ws: true,
-				changeOrigin: true,
-				pathRewrite: {
-					'^/v1': '' // rewrite path
-				}
-			}
-		}
-	},
+	// devServer: {
+	// 	proxy: {
+	// 		'^/v2/': {
+	// 			target: 'https://ummuzayn-api.rezawikan.com/api/',
+	// 			ws: true,
+	// 			changeOrigin: true,
+	// 			pathRewrite: {
+	// 				'^/v2/': '' // rewrite path
+	// 			}
+	// 		},
+	// 		'^/v1/': {
+	// 			target: 'http://cart.test:8080/api/',
+	// 			ws: true,
+	// 			changeOrigin: true,
+	// 			pathRewrite: {
+	// 				'^/v1/': '' // rewrite path
+	// 			}
+	// 		}
+	// 	}
+	// },
   publicPath: '/',
   configureWebpack: {
    plugins: [

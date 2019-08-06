@@ -41,11 +41,23 @@ Vue.use(VueMeta, {
   refreshOnceOnNavigation: true
 })
 
+import VueQuillEditor from 'vue-quill-editor'
+
+// require styles
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
+Vue.use(VueQuillEditor)
+
+
 // axios
 import axios from 'axios'
 Vue.prototype.$axios = axios
 
 
+// ACL
+import acl from './acl/acl'
 
 // Theme Configurations
 import '../themeConfig.js'

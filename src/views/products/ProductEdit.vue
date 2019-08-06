@@ -36,7 +36,8 @@
           </div>
           <div class="vx-row mb-6">
             <div class="vx-col w-full">
-              <vs-textarea label="Summary" v-model="product.description" name="description" ref="description" v-validate="'required'" data-vv-validate-on="blur" />
+              <quill-editor v-model="product.description" name="description" ref="description" v-validate="'required'" data-vv-validate-on="blur"></quill-editor>
+              <!-- <vs-textarea label="Summary" v-model="product.description" name="description" ref="description" v-validate="'required'" data-vv-validate-on="blur" /> -->
               <span class="text-danger text-sm" :show="errors.has('description')">{{ errors.first('description') }}</span>
             </div>
           </div>

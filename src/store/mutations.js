@@ -6,7 +6,7 @@
   Author: Pixinvent
   Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
-
+import localforage from 'localforage'
 
 const mutations = {
 
@@ -40,7 +40,7 @@ const mutations = {
     },
     UPDATE_USER_ROLE(state, val) {
         state.userRole = val
-        localStorage.setItem('userRole', val)
+        localforage.setItem('userRole', val)
     },
     // UPDATE_STATUS_CHAT(state, value) {
     //     state.AppActiveUser.status = value;

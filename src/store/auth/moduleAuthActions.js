@@ -26,11 +26,11 @@ export default {
         })
     },
 
-    fetchUser({ commit }){
+    fetchUser({ commit, dispatch }){
       return axios.get(`${process.env.API_URL}auth/me`).then((response) => {
         commit('SET_AUTHENTICATED', true)
         commit('SET_USER_DATA', response.data)
-        localforage.setItem('userInfo', response.data.data)
+        commit('UPDATE_USER_ROLE', response.data.data.scope, { root: true })
       })
     },
 

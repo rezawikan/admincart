@@ -51,7 +51,8 @@ const router = new Router({
 					component: () => import('./views/Home.vue'),
 					meta: {
 						guest: false,
-						needsAuth: true
+						needsAuth: true,
+						rule: 'admin'
 					},
 				},
 				{
@@ -70,7 +71,8 @@ const router = new Router({
 						],
 						pageTitle: 'Products',
 						guest: false,
-						needsAuth: true
+						needsAuth: true,
+						rule: 'admin'
 					}
 				},
 				{
@@ -92,7 +94,8 @@ const router = new Router({
 						],
 						pageTitle: 'Products',
 						guest: false,
-						needsAuth: true
+						needsAuth: true,
+						rule: 'admin'
 					}
 				},
 				{
@@ -111,7 +114,8 @@ const router = new Router({
 						],
 						pageTitle: 'Stocks',
 						guest: false,
-						needsAuth: true
+						needsAuth: true,
+						rule: 'customer'
 					},
 				},
 				{
@@ -130,7 +134,8 @@ const router = new Router({
 						],
 						pageTitle: 'Orders',
 						guest: false,
-						needsAuth: true
+						needsAuth: true,
+						rule: 'admin'
 					},
 				},
 				{
@@ -153,7 +158,8 @@ const router = new Router({
 						],
 						pageTitle: 'Create Order',
 						guest: false,
-						needsAuth: true
+						needsAuth: true,
+						rule: 'admin'
 					},
 				},
 				{
@@ -176,7 +182,8 @@ const router = new Router({
 						],
 						pageTitle: 'Order Detail',
 						guest: false,
-						needsAuth: true
+						needsAuth: true,
+						rule: 'admin'
 					},
 				},
 				{
@@ -195,7 +202,8 @@ const router = new Router({
 						],
 						pageTitle: 'Customer',
 						guest: false,
-						needsAuth: true
+						needsAuth: true,
+						rule: 'admin'
 					},
 				},
 				{
@@ -214,7 +222,8 @@ const router = new Router({
 						],
 						pageTitle: 'Returns',
 						guest: false,
-						needsAuth: true
+						needsAuth: true,
+						rule: 'admin'
 					},
 				},
 				{
@@ -237,7 +246,8 @@ const router = new Router({
 						],
 						pageTitle: 'Returns Edit',
 						guest: false,
-						needsAuth: true
+						needsAuth: true,
+						rule: 'admin'
 					},
 				},
 				{
@@ -260,7 +270,8 @@ const router = new Router({
 						],
 						pageTitle: 'Shipment',
 						guest: false,
-						needsAuth: true
+						needsAuth: true,
+						rule: 'admin'
 					},
 				},
 				{
@@ -283,7 +294,8 @@ const router = new Router({
 						],
 						pageTitle: 'Shipment',
 						guest: false,
-						needsAuth: true
+						needsAuth: true,
+						rule: 'admin'
 					},
 				},
 				{
@@ -305,7 +317,8 @@ const router = new Router({
 						],
 						pageTitle: 'Provinces',
 						guest: false,
-						needsAuth: true
+						needsAuth: true,
+						rule: 'public'
 					},
 				},
 				{
@@ -327,7 +340,8 @@ const router = new Router({
 						],
 						pageTitle: 'Cities',
 						guest: false,
-						needsAuth: true
+						needsAuth: true,
+						rule: 'admin'
 					},
 				},
 				{
@@ -349,7 +363,8 @@ const router = new Router({
 						],
 						pageTitle: 'Subdistricts',
 						guest: false,
-						needsAuth: true
+						needsAuth: true,
+						rule: 'admin'
 					},
 				},
 				{
@@ -371,7 +386,8 @@ const router = new Router({
 						],
 						pageTitle: 'Cashflow',
 						guest: false,
-						needsAuth: true
+						needsAuth: true,
+						rule: 'admin'
 					},
 				},
 			],
@@ -392,13 +408,19 @@ const router = new Router({
 					component: () => import('@/views/auth/Login.vue'),
 					meta: {
 						guest: true,
-						needsAuth: false
+						needsAuth: false,
+						rule: 'public'
 					}
 				},
 				{
 					path: '/error-404',
 					name: '404',
-					component: () => import('@/views/error/Error404.vue')
+					component: () => import('@/views/error/Error404.vue'),
+					meta: {
+						guest: true,
+						needsAuth: false,
+						rule: '*'
+					}
 				},
 			]
 		},
